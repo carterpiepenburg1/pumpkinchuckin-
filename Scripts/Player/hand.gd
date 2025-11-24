@@ -4,3 +4,4 @@ extends XRController3D
 @onready var handGripping = false
 @onready var setOffset = false
 @onready var handOffset = 0
+@onready var grabbedArea = null
