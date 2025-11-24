@@ -1,8 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnfyj80sfpkq3"]
+[gd_scene load_steps=7 format=3 uid="uid://cnfyj80sfpkq3"]
 
 [ext_resource type="Script" uid="uid://b0arcax67joif" path="res://Scripts/initializevr.gd" id="1_ua3oe"]
+[ext_resource type="Script" uid="uid://blp7t2rm6f3sg" path="res://Scripts/Player/player.gd" id="2_c37g7"]
+[ext_resource type="PackedScene" uid="uid://bvs3tncwlldvy" path="res://Scenes/Objects/pumpkin.tscn" id="2_o7usi"]
+[ext_resource type="Script" uid="uid://dnxoog51swnsj" path="res://Scripts/Player/hand.gd" id="3_gfff3"]
 
 [sub_resource type="Environment" id="Environment_2t1jq"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gfff3"]
+radius = 0.049555775
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ua3oe")
@@ -16,6 +22,7 @@ environment = SubResource("Environment_2t1jq")
 
 [node name="Player" type="XROrigin3D" parent="."]
 transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, 0, 0.123353, 0)
+script = ExtResource("2_c37g7")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
@@ -24,13 +31,36 @@ far = 400.0
 [node name="Left" type="XRController3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
 tracker = &"left_hand"
+script = ExtResource("3_gfff3")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Player/Left"]
+[node name="LeftModel" type="CSGSphere3D" parent="Player/Left"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Area" type="Area3D" parent="Player/Left"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Left/Area"]
+shape = SubResource("SphereShape3D_gfff3")
 
 [node name="Right" type="XRController3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
+script = ExtResource("3_gfff3")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Player/Right"]
+[node name="RightModel" type="CSGSphere3D" parent="Player/Right"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Area" type="Area3D" parent="Player/Right"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Right/Area"]
+shape = SubResource("SphereShape3D_gfff3")
+
+[node name="Pumpkin" parent="." instance=ExtResource("2_o7usi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7811059, 1.1165404, -1.1482626)
+
+[node name="Pumpkin2" parent="." instance=ExtResource("2_o7usi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35381067, 1.1165404, -1.1482626)
+
+[connection signal="button_pressed" from="Player/Left" to="Player" method="_on_left_button_pressed"]
+[connection signal="button_released" from="Player/Left" to="Player" method="_on_left_button_released"]
+[connection signal="button_pressed" from="Player/Right" to="Player" method="_on_right_button_pressed"]
+[connection signal="button_released" from="Player/Right" to="Player" method="_on_right_button_released"]
