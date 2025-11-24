@@ -1,21 +1,25 @@
 extends Node3D
 
 
-@onready var onVine = true
-@onready var inHand = false
-@onready var inSling = false
+var onVine = true
+var inHand = false
+var inSling = false
+var flung = false
 
-@onready var velocity = 0
+var velocity = Vector3(0, 0, 0)
+var gravity = 9.8
+
+var angle = 0
+var speed = 0
 
 func _process(delta: float) -> void:
 	
-	if onVine == false && inHand == false && inSling == false:
-		velocity += 2.6 * delta
-		global_position.y -= velocity * delta
-		
-		if global_position.y < 0:
+	if (onVine == false && inHand == false && inSling == false) || flung == true:
+		velocity.y -= gravity * delta
+		global_position += velocity * delta
+	else:
+		velocity = Vector3(0, 0, 0)
+	
+	if global_position.y < 0:
 			queue_free()
 			print("Pumpkin has been Dropped")
-	
-	else:
-		velocity = 0
