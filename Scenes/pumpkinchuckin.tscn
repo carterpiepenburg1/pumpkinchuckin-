@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnfyj80sfpkq3"]
+
+[ext_resource type="Script" uid="uid://b0arcax67joif" path="res://Scripts/initializevr.gd" id="1_ua3oe"]
+
+[sub_resource type="Environment" id="Environment_2t1jq"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_ua3oe")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.08686353, 0.8868179, -0.45388195, -0.15191406, 0.46206695, 0.873737, 0.9845694, -0.00694483, 0.17485687, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2t1jq")
+
+[node name="Player" type="XROrigin3D" parent="."]
+transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, 0, 0.123353, 0)
+
+[node name="XRCamera3D" type="XRCamera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+far = 400.0
+
+[node name="Left" type="XRController3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Player/Left"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Right" type="XRController3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Player/Right"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)

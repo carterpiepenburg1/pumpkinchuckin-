@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvs3tncwlldvy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cf2sr"]
+albedo_color = Color(0.90585834, 0.33098608, 1.92523e-07, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cf2sr"]
+
+[node name="Pumpkin" type="Node3D"]
+
+[node name="PumpkinModel" type="CSGSphere3D" parent="."]
+material_override = SubResource("StandardMaterial3D_cf2sr")
+
+[node name="PumpkinArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PumpkinArea"]
+shape = SubResource("SphereShape3D_cf2sr")

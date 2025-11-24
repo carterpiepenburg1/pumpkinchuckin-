@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://3bm4j61b1rvo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gg80o"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gg80o"]
+
+[node name="Enemy" type="Node3D"]
+
+[node name="EnemyModel" type="CSGCylinder3D" parent="."]
+material_override = SubResource("StandardMaterial3D_gg80o")
+
+[node name="EnemyArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyArea"]
+shape = SubResource("CylinderShape3D_gg80o")
