@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnfyj80sfpkq3"]
+[gd_scene load_steps=8 format=3 uid="uid://cnfyj80sfpkq3"]
 
 [ext_resource type="Script" uid="uid://b0arcax67joif" path="res://Scripts/initializevr.gd" id="1_ua3oe"]
 [ext_resource type="Script" uid="uid://blp7t2rm6f3sg" path="res://Scripts/Player/player.gd" id="2_c37g7"]
 [ext_resource type="PackedScene" uid="uid://bvs3tncwlldvy" path="res://Scenes/Objects/pumpkin.tscn" id="2_o7usi"]
 [ext_resource type="Script" uid="uid://dnxoog51swnsj" path="res://Scripts/Player/hand.gd" id="3_gfff3"]
+[ext_resource type="PackedScene" uid="uid://3bm4j61b1rvo" path="res://Scenes/Objects/enemy.tscn" id="5_3odlv"]
 
 [sub_resource type="Environment" id="Environment_2t1jq"]
 
@@ -56,6 +57,9 @@ shape = SubResource("SphereShape3D_gfff3")
 
 [node name="Pumpkin" parent="." instance=ExtResource("2_o7usi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7811059, 1.1165404, -1.1482626)
+
+[node name="Enemy" parent="." instance=ExtResource("5_3odlv")]
+transform = Transform3D(-0.06975647, 0, -0.9975639, 0, 0.9999999, 0, 0.99756396, 0, -0.06975646, 0, 1.1707717, -3.4422417)
 
 [node name="Pumpkin2" parent="." instance=ExtResource("2_o7usi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35381067, 1.1165404, -1.1482626)
