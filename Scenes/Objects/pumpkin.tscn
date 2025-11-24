@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvs3tncwlldvy"]
+[gd_scene load_steps=4 format=3 uid="uid://bvs3tncwlldvy"]
+
+[ext_resource type="Script" uid="uid://b04htxane3pek" path="res://Scripts/Pumkin-Scripts/pumpkin_move.gd" id="1_5v8eb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cf2sr"]
 albedo_color = Color(0.90585834, 0.33098608, 1.92523e-07, 1)
@@ -9,6 +11,7 @@ albedo_color = Color(0.90585834, 0.33098608, 1.92523e-07, 1)
 
 [node name="PumpkinModel" type="CSGSphere3D" parent="."]
 material_override = SubResource("StandardMaterial3D_cf2sr")
+script = ExtResource("1_5v8eb")
 
 [node name="PumpkinArea" type="Area3D" parent="."]
 
