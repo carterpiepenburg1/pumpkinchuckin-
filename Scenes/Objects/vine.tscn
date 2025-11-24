@@ -1,3 +1,61 @@
-[gd_scene format=3 uid="uid://cy6tf6pp8tta6"]
+[gd_scene load_steps=7 format=3 uid="uid://cy6tf6pp8tta6"]
+
+[ext_resource type="Script" uid="uid://c66ebpbgc56iy" path="res://Scripts/Pumkin-Scripts/vineSpawn.gd" id="1_73ut5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pw5j8"]
+albedo_color = Color(0.043137256, 0.14509805, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_73ut5"]
+albedo_color = Color(0, 0.23137255, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gqlm5"]
+albedo_color = Color(0, 0.22352941, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7njv"]
+albedo_color = Color(0, 0.23921569, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_go8tx"]
+albedo_color = Color(0, 0.25490198, 0, 1)
 
 [node name="Vine" type="Node3D"]
+script = ExtResource("1_73ut5")
+
+[node name="BaseVine" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8945285, 0)
+material = SubResource("StandardMaterial3D_pw5j8")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.7969835, 0.6040011, 0, -0.6040011, 0.7969835, 0, 0, 0, 1, 0.42521513, 2.3931515, -0.018218398)
+radius = 0.36816406
+height = 2.0061035
+material = SubResource("StandardMaterial3D_73ut5")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.077441916, 0.99604326, 0.04359364, -0.96178806, 0.08615306, -0.2598882, -0.26261565, -0.021801615, 0.9646543, 1.2445282, 3.2378967, -0.034284323)
+radius = 0.1484375
+height = 1.0129395
+material = SubResource("StandardMaterial3D_gqlm5")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.9547297, -0.29747483, 0, 0.29747483, 0.9547297, 0, 0, 0, 1, 1.6822165, 3.0342283, -0.04138051)
+radius = 0.10205078
+height = 0.7028198
+material = SubResource("StandardMaterial3D_l7njv")
+
+[node name="EndVine" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7906126, 2.6809673, -0.044474974)
+radius = 0.019042969
+height = 0.12989807
+material = SubResource("StandardMaterial3D_go8tx")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
