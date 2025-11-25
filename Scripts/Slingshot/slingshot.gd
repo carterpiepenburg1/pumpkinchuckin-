@@ -2,10 +2,13 @@ extends Node3D
 
 @onready var sling = $Sling
 @onready var slingArea = $Sling/SlingArea
+
 @onready var leftRope = $LeftRope
 @onready var rightRope = $RightRope
 @onready var leftLog = $LeftLog
 @onready var rightLog = $RightLog
+
+@onready var target = $Target
 
 #Ropes
 var leftRopeSling
@@ -42,6 +45,7 @@ func _process(delta: float) -> void:
 		
 	#Checking if sling is being grabbed
 	if !beingGrabbed:
+		target.visible = false
 		sling.global_position = lerp(sling.global_position, origin, delta*20)
 		
 		#if loaded and out of pull back deadzone shoot pumpkin once you get back to pull back deadzone
@@ -51,20 +55,49 @@ func _process(delta: float) -> void:
 			
 			print("flung pumpkin")
 			
-			loadedPumpkin.speed = sling.global_position.distance_to(origin)
-			var direction = (origin - sling.global_position).normalized()
-			loadedPumpkin.velocity = direction * loadedPumpkin.speed * launchMult
-			
+			loadedPumpkin.velocity = getTrajectory(sling, origin)
+			loadedPumpkin.startPos = loadedPumpkin.global_position
+			loadedPumpkin.time = 0.0
 			
 			loadedPumpkin.flung = true
 			loadedPumpkin.inSling = false
 			
-			area.monitorable = true
-			area.monitoring = true
+			area.set_deferred("monitorable", true)
+			area.set_deferred("monitoring", true)
 			
 			loaded = false
 			loadedPumpkin = null
+	elif beingGrabbed && loaded && loadedPumpkin != null:
+		#Calculate trajectory and display visual 
+		var trajectory = getTrajectory(sling, origin)
+		var pumpkinPos = loadedPumpkin.global_position
+		var gravity = loadedPumpkin.gravity
+		
+		var landing_pos = Vector3(0, 0, 0)
+			
+		var a = 0.5 * gravity.y
+		var b = trajectory.y
+		var c = pumpkinPos.y 
+		var discriminant = b*b - 4*a*c
+		if discriminant >= 0:
+			var t = (-b - sqrt(discriminant)) / (2*a)
+			if t > 0:
+				landing_pos = pumpkinPos + trajectory * t + 0.5 * gravity * t * t
+		
+		#Pumpking landing target
+		target.visible = true
+		target.global_position = landing_pos
+		
+	else:
+		target.visible = false
 	
+
+func getTrajectory(s, o):
+	#var offset = s.global_position.distance_to(o)
+	#var direction = (o - s.global_position).normalized()
+	#return direction * offset * launchMult
+	
+	return (o - s.global_position) * launchMult
 
 func update_rope(cylinder, start, end):
 	var dir = end - start
@@ -75,10 +108,10 @@ func update_rope(cylinder, start, end):
 func _on_sling_area_area_entered(area: Area3D) -> void:
 	if !loaded && area.name == "PumpkinArea":
 		var pumpkin = area.get_parent()
-		if pumpkin.inSling == false && pumpkin.flung == false:
+		if pumpkin.inSling == false && pumpkin.flung == false && pumpkin.onVine == false:
 			pumpkin.inSling = true
-			area.monitorable = false
-			area.monitoring = false
+			area.set_deferred("monitorable", false)
+			area.set_deferred("monitoring", false)
 				
 			loaded = true
 			loadedPumpkin = pumpkin

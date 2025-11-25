@@ -22,6 +22,7 @@ func updateHand(hand):
 				hand.setOffset = true
 					
 			#When grabbing objects
+			#Pumpkin
 			if hand.grabbedArea.name == "PumpkinArea":
 				var pumpkin = hand.grabbedArea.get_parent()
 				if pumpkin.inSling == false && pumpkin.flung == false:
@@ -29,9 +30,11 @@ func updateHand(hand):
 					pumpkin.inHand = true
 					pumpkin.onVine = false
 			
+			#Slingshot
 			if hand.grabbedArea.name == "SlingArea":
 				var slingshot = hand.grabbedArea.get_parent().get_parent()
 				var sling = hand.grabbedArea.get_parent()
+				#needs to be fixed
 				sling.global_position = hand.handArea.global_transform * hand.handOffset.origin
 				slingshot.beingGrabbed = true
 				
@@ -44,10 +47,14 @@ func updateHand(hand):
 		#When letting go of objects
 		if hand.grabbedArea != null:
 			
+			#Pumpkin
 			if hand.grabbedArea.name == "PumpkinArea":
 				var pumpkin = hand.grabbedArea.get_parent()
+				pumpkin.startPos = (hand.handArea.global_transform * hand.handOffset).origin
+				pumpkin.time = 0.0
 				pumpkin.inHand = false
 		
+			#Slingshot
 			if hand.grabbedArea.name == "SlingArea":
 				var slingshot = hand.grabbedArea.get_parent().get_parent()
 				slingshot.beingGrabbed = false
