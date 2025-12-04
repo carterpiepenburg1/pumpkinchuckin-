@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cnfyj80sfpkq3"]
+[gd_scene load_steps=18 format=3 uid="uid://cnfyj80sfpkq3"]
 
 [ext_resource type="Script" uid="uid://b0arcax67joif" path="res://Scripts/initializevr.gd" id="1_ua3oe"]
 [ext_resource type="Texture2D" uid="uid://ujlhjpujhisj" path="res://Resources/Textures/sky.png" id="2_3n5g3"]
@@ -44,12 +44,6 @@ radius = 0.3
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebto2"]
 transparency = 1
 albedo_color = Color(1, 0, 0, 0.4627451)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iswhu"]
-transparency = 1
-albedo_color = Color(1, 0, 0, 0.5176471)
-
-[sub_resource type="Curve3D" id="Curve3D_yqnnc"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ua3oe")
@@ -150,20 +144,6 @@ material_override = SubResource("StandardMaterial3D_8o4mi")
 radius = 0.1
 height = 1.5
 
-[node name="RightRope" type="CSGCylinder3D" parent="Slingshot"]
-transform = Transform3D(-4.371139e-08, 0.99999994, 0, -1, -4.3711385e-08, 0, 0, 0, 1, 0.6, 1.082097, 0)
-visible = false
-material_override = SubResource("StandardMaterial3D_3n5g3")
-radius = 0.025
-height = 0.75
-
-[node name="LeftRope" type="CSGCylinder3D" parent="Slingshot"]
-transform = Transform3D(-4.371139e-08, -0.99999994, 0, 1, -4.3711385e-08, 0, 0, 0, 1, -0.6, 1.082097, 0)
-visible = false
-material_override = SubResource("StandardMaterial3D_3n5g3")
-radius = 0.025
-height = 0.75
-
 [node name="Sling" type="CSGTorus3D" parent="Slingshot"]
 transform = Transform3D(1, 0, 0, 0, -0.64278764, -0.76604444, 0, 0.76604444, -0.64278764, 0, 1.082097, 0)
 material_override = SubResource("StandardMaterial3D_3n5g3")
@@ -185,27 +165,6 @@ material_override = SubResource("StandardMaterial3D_ebto2")
 inner_radius = 0.8
 sides = 20
 ring_sides = 10
-
-[node name="TrajectoryLine" type="Node3D" parent="Slingshot"]
-visible = false
-
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Slingshot/TrajectoryLine"]
-polygon = PackedVector2Array(-0.05, -0.05, -0.05, 0.05, 0.05, 0.05, 0.05, -0.05)
-mode = 2
-path_node = NodePath("../Path3D")
-path_interval_type = 0
-path_interval = 1.0
-path_simplify_angle = 0.0
-path_rotation = 2
-path_rotation_accurate = false
-path_local = false
-path_continuous_u = true
-path_u_distance = 1.0
-path_joined = false
-material = SubResource("StandardMaterial3D_iswhu")
-
-[node name="Path3D" type="Path3D" parent="Slingshot/TrajectoryLine"]
-curve = SubResource("Curve3D_yqnnc")
 
 [connection signal="button_pressed" from="Player/Left" to="Player" method="_on_left_button_pressed"]
 [connection signal="button_released" from="Player/Left" to="Player" method="_on_left_button_released"]

@@ -14,10 +14,10 @@ var time = 0.0
 @onready var dotTimer = $DotTimer
 @onready var dot = load("res://Scenes/Objects/dot.tscn")
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	
 	if (onVine == false && inHand == false && inSling == false) || flung == true:
-		if dotTimer.is_stopped():
+		if flung && dotTimer.is_stopped():
 			dotTimer.start()
 		time += delta
 		global_position = startPos + velocity * time + 0.5 * gravity * time * time
@@ -26,7 +26,6 @@ func _process(delta: float) -> void:
 	
 	if global_position.y < 0:
 			queue_free()
-			print("Pumpkin hit floor at: " % global_position)
 
 
 func _on_dot_timer_timeout() -> void:

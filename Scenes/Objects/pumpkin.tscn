@@ -11,6 +11,9 @@ albedo_color = Color(0.90585834, 0.33098608, 1.92523e-07, 1)
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_5v8eb")
 
+[node name="DotTimer" type="Timer" parent="."]
+wait_time = 0.1
+
 [node name="PumpkinModel" type="CSGSphere3D" parent="."]
 material_override = SubResource("StandardMaterial3D_cf2sr")
 
@@ -18,8 +21,5 @@ material_override = SubResource("StandardMaterial3D_cf2sr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PumpkinArea"]
 shape = SubResource("SphereShape3D_cf2sr")
-
-[node name="DotTimer" type="Timer" parent="."]
-wait_time = 0.1
 
 [connection signal="timeout" from="DotTimer" to="." method="_on_dot_timer_timeout"]
