@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://cnfyj80sfpkq3"]
+[gd_scene load_steps=19 format=3 uid="uid://cnfyj80sfpkq3"]
 
 [ext_resource type="Script" uid="uid://b0arcax67joif" path="res://Scripts/initializevr.gd" id="1_ua3oe"]
 [ext_resource type="Texture2D" uid="uid://ujlhjpujhisj" path="res://Resources/Textures/sky.png" id="2_3n5g3"]
 [ext_resource type="Script" uid="uid://blp7t2rm6f3sg" path="res://Scripts/Player/player.gd" id="2_c37g7"]
+[ext_resource type="Script" uid="uid://yripqjx66c00" path="res://Scripts/game_manager.gd" id="2_yqnnc"]
 [ext_resource type="Script" uid="uid://dnxoog51swnsj" path="res://Scripts/Player/hand.gd" id="3_gfff3"]
 [ext_resource type="PackedScene" uid="uid://3bm4j61b1rvo" path="res://Scenes/Objects/enemy.tscn" id="5_3odlv"]
 [ext_resource type="PackedScene" uid="uid://cy6tf6pp8tta6" path="res://Scenes/Objects/vine.tscn" id="5_8o4mi"]
@@ -47,6 +48,12 @@ albedo_color = Color(1, 0, 0, 0.4627451)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ua3oe")
+
+[node name="GameManager" type="Node3D" parent="."]
+script = ExtResource("2_yqnnc")
+
+[node name="AdvanceTimer" type="Timer" parent="GameManager"]
+wait_time = 5.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.08686353, 0.8868179, -0.45388195, -0.15191406, 0.46206695, 0.873737, 0.9845694, -0.006944829, 0.17485687, 0, 5.125532, 0)
@@ -166,6 +173,7 @@ inner_radius = 0.8
 sides = 20
 ring_sides = 10
 
+[connection signal="timeout" from="GameManager/AdvanceTimer" to="GameManager" method="_on_advance_timer_timeout"]
 [connection signal="button_pressed" from="Player/Left" to="Player" method="_on_left_button_pressed"]
 [connection signal="button_released" from="Player/Left" to="Player" method="_on_left_button_released"]
 [connection signal="button_pressed" from="Player/Right" to="Player" method="_on_right_button_pressed"]
