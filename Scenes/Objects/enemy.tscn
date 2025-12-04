@@ -1,9 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://3bm4j61b1rvo"]
+[gd_scene load_steps=15 format=3 uid="uid://3bm4j61b1rvo"]
 
 [ext_resource type="Script" uid="uid://c52xympfjpqfp" path="res://Scripts/enemy/enemy.gd" id="1_7ifby"]
+[ext_resource type="Script" uid="uid://bh1xxfkqxn2qr" path="res://Scripts/enemy/scarecrow.gd" id="1_i2hje"]
 
 [sub_resource type="Animation" id="Animation_i2hje"]
 length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_7ifby"]
 resource_name = "Scarecrow"
@@ -12,10 +20,10 @@ loop_mode = 1
 tracks/0/type = "rotation_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Models/Scarecrow")
+tracks/0/path = NodePath("Model")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 1, 0.06507222, 0, 0, 0.9978805, 2, 1, 0, 0, 0, 1, 3, 1, -0.065403126, 0, 0, 0.99785894, 4, 1, 0, 0, 0, 1)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 2, 1, 0.17364818, 0, 0, 0.9848077)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ink2j"]
 _data = {
@@ -49,9 +57,9 @@ albedo_color = Color(0.1254902, 0.43529412, 0.81960785, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gg80o"]
 
-[node name="Enemy" type="Node3D"]
+[node name="Scarecrow" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
-script = ExtResource("1_7ifby")
+script = ExtResource("1_i2hje")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
@@ -61,71 +69,69 @@ one_shot = true
 libraries = {
 &"": SubResource("AnimationLibrary_ink2j")
 }
+autoplay = "Scarecrow"
 
-[node name="Models" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="."]
 
-[node name="Scarecrow" type="Node3D" parent="Models"]
-transform = Transform3D(1, 0, 0, 0, 0.99147826, 0.13027129, 0, -0.13027129, 0.99147826, 0, 0, 0)
-
-[node name="Head" type="CSGSphere3D" parent="Models/Scarecrow"]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.71929777, 0)
+[node name="Head" type="CSGSphere3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.99147815, 0.13027126, 0, -0.13027126, 0.99147815, 0, 0.7131681, -0.093703836)
 material_override = SubResource("StandardMaterial3D_i2hje")
 radius = 0.3
 
-[node name="Right Eye" type="CSGTorus3D" parent="Models/Scarecrow"]
-transform = Transform3D(0.08418603, 0.96225005, 0.258819, -0.9961946, 0.08715579, 0, -0.022557579, -0.2578341, 0.96592563, 0.248, 0.7929999, -0.099999994)
+[node name="Right Eye" type="CSGTorus3D" parent="Model"]
+transform = Transform3D(0.08418603, 0.96225005, 0.258819, -0.99064386, 0.052824687, 0.12583236, 0.10741019, -0.26699078, 0.95769423, 0.248, 0.773215, -0.20245293)
 material_override = SubResource("StandardMaterial3D_vm7cc")
 inner_radius = 0.03
 outer_radius = 0.06
 
-[node name="Left Eye" type="CSGTorus3D" parent="Models/Scarecrow"]
-transform = Transform3D(0.08418603, 0.9622501, -0.258819, -0.9961946, 0.08715579, 0, 0.022557579, 0.2578341, 0.9659257, 0.248, 0.7929999, 0.099999994)
+[node name="Left Eye" type="CSGTorus3D" parent="Model"]
+transform = Transform3D(0.08418603, 0.9622501, -0.258819, -0.9847666, 0.120001435, 0.12583236, 0.15214089, 0.244283, 0.9576943, 0.248, 0.79926926, -0.0041572973)
 material_override = SubResource("StandardMaterial3D_osb2a")
 inner_radius = 0.03
 outer_radius = 0.06
 
-[node name="Nose" type="CSGCylinder3D" parent="Models/Scarecrow"]
-transform = Transform3D(0.8660254, -0.5, 0, 0.49999997, 0.8660253, 0, 0, 0, 0.99999994, 0.278, 0.71999997, 0)
+[node name="Nose" type="CSGCylinder3D" parent="Model"]
+transform = Transform3D(0.8660254, -0.5, 0, 0.49573907, 0.85864526, 0.13027126, -0.06513563, -0.11281822, 0.99147815, 0.278, 0.71386427, -0.093795314)
 material_override = SubResource("StandardMaterial3D_v3p23")
 radius = 0.03
 height = 0.1
 
-[node name="Right Arm" type="CSGCylinder3D" parent="Models/Scarecrow"]
-transform = Transform3D(1, 0, 0, 0, -0.17364816, 0.98480755, 0, -0.98480755, -0.17364816, 0, 0.24999999, -0.32499996)
+[node name="Right Arm" type="CSGCylinder3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -0.30046052, 0.9537938, 0, -0.9537938, -0.30046052, 0, 0.20553137, -0.3547982)
 material_override = SubResource("StandardMaterial3D_7ifby")
 radius = 0.15
 height = 0.4
 
-[node name="Left Arm" type="CSGCylinder3D" parent="Models/Scarecrow"]
-transform = Transform3D(1, 0, 0, 0, -0.17364816, -0.98480755, 0, 0.98480755, -0.17364816, 0, 0.24999999, 0.32499996)
+[node name="Left Arm" type="CSGCylinder3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, -0.043876246, -0.9990366, 0, 0.9990366, -0.043876246, 0, 0.29020768, 0.28966254)
 material_override = SubResource("StandardMaterial3D_7ifby")
 radius = 0.15
 height = 0.4
 
-[node name="Body" type="CSGCylinder3D" parent="Models/Scarecrow"]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.06626531, 0)
+[node name="Body" type="CSGCylinder3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.99147815, 0.13027126, 0, -0.13027126, 0.99147815, 0, 0.065700606, -0.008632466)
 material_override = SubResource("StandardMaterial3D_gg80o")
 radius = 0.2
 height = 0.8
 
-[node name="Right Leg" type="CSGCylinder3D" parent="Models/Scarecrow"]
-transform = Transform3D(1, 0, 0, 0, 0.990268, -0.13917309, 0, 0.13917309, 0.990268, 0, -0.63499993, -0.14999999)
+[node name="Right Leg" type="CSGCylinder3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.99995935, -0.008983627, 0, 0.008983627, 0.99995935, 0, -0.6491293, -0.06599948)
 material_override = SubResource("StandardMaterial3D_8ypxt")
 radius = 0.15
 height = 0.7
 
-[node name="Left Leg" type="CSGCylinder3D" parent="Models/Scarecrow"]
-transform = Transform3D(1, 0, 0, 0, 0.990268, 0.13917309, 0, -0.13917309, 0.990268, 0, -0.63499993, 0.14999999)
+[node name="Left Leg" type="CSGCylinder3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.96369886, 0.26699054, 0, -0.26699054, 0.96369886, 0, -0.61004794, 0.23144397)
 material_override = SubResource("StandardMaterial3D_ink2j")
 radius = 0.15
 height = 0.7
 
-[node name="EnemyArea" type="Area3D" parent="Models/Scarecrow"]
-transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
+[node name="EnemyArea" type="Area3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.991478, 0.13027124, 0, -0.13027124, 0.991478, 0, 0, 0)
+script = ExtResource("1_7ifby")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Models/Scarecrow/EnemyArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/EnemyArea"]
 shape = SubResource("CylinderShape3D_gg80o")
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="area_entered" from="Models/Scarecrow/EnemyArea" to="." method="_on_enemy_area_area_entered"]
+[connection signal="timeout" from="Timer" to="Model/EnemyArea" method="_on_timer_timeout"]
+[connection signal="area_entered" from="Model/EnemyArea" to="Model/EnemyArea" method="_on_area_entered"]

@@ -1,16 +1,24 @@
-[gd_scene load_steps=14 format=3 uid="uid://cnfyj80sfpkq3"]
+[gd_scene load_steps=20 format=3 uid="uid://cnfyj80sfpkq3"]
 
 [ext_resource type="Script" uid="uid://b0arcax67joif" path="res://Scripts/initializevr.gd" id="1_ua3oe"]
+[ext_resource type="Texture2D" uid="uid://ujlhjpujhisj" path="res://Resources/Textures/sky.png" id="2_3n5g3"]
 [ext_resource type="Script" uid="uid://blp7t2rm6f3sg" path="res://Scripts/Player/player.gd" id="2_c37g7"]
 [ext_resource type="Script" uid="uid://dnxoog51swnsj" path="res://Scripts/Player/hand.gd" id="3_gfff3"]
 [ext_resource type="PackedScene" uid="uid://3bm4j61b1rvo" path="res://Scenes/Objects/enemy.tscn" id="5_3odlv"]
 [ext_resource type="PackedScene" uid="uid://cy6tf6pp8tta6" path="res://Scenes/Objects/vine.tscn" id="5_8o4mi"]
 [ext_resource type="Script" uid="uid://cf6yojo8rcx4y" path="res://Scripts/Slingshot/slingshot.gd" id="6_8o4mi"]
+[ext_resource type="Texture2D" uid="uid://sntfeilnq72k" path="res://Resources/Textures/grass.jpg" id="6_ebto2"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ebto2"]
+panorama = ExtResource("2_3n5g3")
+
+[sub_resource type="Sky" id="Sky_yqnnc"]
+sky_material = SubResource("PanoramaSkyMaterial_ebto2")
 
 [sub_resource type="Environment" id="Environment_2t1jq"]
-background_mode = 1
+background_mode = 2
 background_color = Color(0.76037085, 0.97431797, 0.9702292, 1)
-fog_enabled = true
+sky = SubResource("Sky_yqnnc")
 fog_light_color = Color(0.73032373, 0.96586627, 0.9999998, 1)
 fog_sun_scatter = 0.5
 fog_density = 0.0
@@ -18,8 +26,10 @@ fog_density = 0.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_gfff3"]
 radius = 0.049555775
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3odlv"]
-albedo_color = Color(0.9137255, 0.44705883, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqnnc"]
+albedo_color = Color(1, 0.62, 0.62, 1)
+albedo_texture = ExtResource("6_ebto2")
+uv1_scale = Vector3(2000, 2000, 2000)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8o4mi"]
 albedo_color = Color(0.35095242, 0.15484291, 0.07356518, 1)
@@ -34,6 +44,12 @@ radius = 0.3
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebto2"]
 transparency = 1
 albedo_color = Color(1, 0, 0, 0.4627451)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iswhu"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.5176471)
+
+[sub_resource type="Curve3D" id="Curve3D_yqnnc"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ua3oe")
@@ -106,20 +122,20 @@ transform = Transform3D(-0.12728967, 0, -0.99186563, 0, 0.9999999, 0, 0.9918657,
 
 [node name="Floor" type="CSGBox3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-material_override = SubResource("StandardMaterial3D_3odlv")
 size = Vector3(4000, 1, 4000)
+material = SubResource("StandardMaterial3D_yqnnc")
 
-[node name="Vine" parent="." instance=ExtResource("5_8o4mi")]
+[node name="Vine" parent="Environment" instance=ExtResource("5_8o4mi")]
 transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 1.7, 0, 0)
 
-[node name="Vine3" parent="." instance=ExtResource("5_8o4mi")]
+[node name="Vine3" parent="Environment" instance=ExtResource("5_8o4mi")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.7, 0, 0)
 
-[node name="Vine2" parent="." instance=ExtResource("5_8o4mi")]
+[node name="Vine2" parent="Environment" instance=ExtResource("5_8o4mi")]
 transform = Transform3D(0.00034902245, 0, 0.49999985, 0, 0.5, 0, -0.49999985, 0, 0.00034902245, 0, 0, 1.7)
 
 [node name="Slingshot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.93379486)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.7283299)
 script = ExtResource("6_8o4mi")
 
 [node name="RightLog" type="CSGCylinder3D" parent="Slingshot"]
@@ -169,6 +185,27 @@ material_override = SubResource("StandardMaterial3D_ebto2")
 inner_radius = 0.8
 sides = 20
 ring_sides = 10
+
+[node name="TrajectoryLine" type="Node3D" parent="Slingshot"]
+visible = false
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Slingshot/TrajectoryLine"]
+polygon = PackedVector2Array(-0.05, -0.05, -0.05, 0.05, 0.05, 0.05, 0.05, -0.05)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_iswhu")
+
+[node name="Path3D" type="Path3D" parent="Slingshot/TrajectoryLine"]
+curve = SubResource("Curve3D_yqnnc")
 
 [connection signal="button_pressed" from="Player/Left" to="Player" method="_on_left_button_pressed"]
 [connection signal="button_released" from="Player/Left" to="Player" method="_on_left_button_released"]

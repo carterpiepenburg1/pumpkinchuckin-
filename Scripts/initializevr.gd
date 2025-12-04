@@ -12,6 +12,8 @@ var xr_is_focused = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	xr_interface = XRServer.find_interface("OpenXR")
+	
+	
 	if xr_interface and xr_interface.is_initialized():
 		print("OpenXR instantiated successfully.")
 		var vp : Viewport = get_viewport()

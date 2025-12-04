@@ -1,22 +1,21 @@
-extends Node3D
+extends Area3D
 
-var enemy_type = 0
-@onready var scarecrowModel = $Models/Scarecrow
-
-func _ready() -> void:
-	
-	#Hide all models
-	scarecrowModel.visible = false
-	
-	if enemy_type == 0:
-		$AnimationPlayer.play("Scarecrow")
-		scarecrowModel.visible = true
-	
-func _on_enemy_area_area_entered(area: Area3D) -> void:
-	if area.name == "PumpkinArea" && visible:
-		visible = false
-		$Timer.start()
+@onready var parent = get_parent()
+@onready var timer = $"../../Timer"
 		
-
 func _on_timer_timeout() -> void:
-	visible = true
+	parent.visible = true
+	
+	#Enable area3D
+	set_deferred("monitorable", true)
+	set_deferred("monitoring", true)
+
+func _on_area_entered(area: Area3D) -> void:
+	if area.name == "PumpkinArea" && visible:
+		parent.visible = false
+		
+		#Disable area3D
+		set_deferred("monitorable", false)
+		set_deferred("monitoring", false)
+		
+		timer.start()

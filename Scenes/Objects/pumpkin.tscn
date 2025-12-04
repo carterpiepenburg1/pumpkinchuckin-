@@ -18,3 +18,8 @@ material_override = SubResource("StandardMaterial3D_cf2sr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PumpkinArea"]
 shape = SubResource("SphereShape3D_cf2sr")
+
+[node name="DotTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="DotTimer" to="." method="_on_dot_timer_timeout"]

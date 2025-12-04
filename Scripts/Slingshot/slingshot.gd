@@ -9,6 +9,8 @@ extends Node3D
 @onready var rightLog = $RightLog
 
 @onready var target = $Target
+@onready var trajectoryLine = $TrajectoryLine
+@onready var trajectoryPath = $TrajectoryLine/Path3D
 
 #Ropes
 var leftRopeSling
@@ -29,13 +31,13 @@ var launchMult = 40
 func _process(delta: float) -> void:
 	
 	#Updating ropes
-	leftRopeSling = Vector3(sling.global_position.x - sling.inner_radius - (sling.outer_radius - sling.inner_radius)/2, sling.global_position.y, sling.global_position.z)
-	leftRopeLog = Vector3(leftLog.global_position.x, leftLog.global_position.y + leftLog.height/4, leftLog.global_position.z)
-	rightRopeSling = Vector3(sling.global_position.x + sling.inner_radius + (sling.outer_radius - sling.inner_radius)/2, sling.global_position.y, sling.global_position.z)
-	rightRopeLog = Vector3(rightLog.global_position.x, rightLog.global_position.y + rightLog.height/4, rightLog.global_position.z)
-	
-	update_rope(leftRope, leftRopeSling, leftRopeLog)
-	update_rope(rightRope, rightRopeSling, rightRopeLog)
+	#leftRopeSling = Vector3(sling.global_position.x - sling.inner_radius - (sling.outer_radius - sling.inner_radius)/2, sling.global_position.y, sling.global_position.z)
+	#leftRopeLog = Vector3(leftLog.global_position.x, leftLog.global_position.y + leftLog.height/4, leftLog.global_position.z)
+	#rightRopeSling = Vector3(sling.global_position.x + sling.inner_radius + (sling.outer_radius - sling.inner_radius)/2, sling.global_position.y, sling.global_position.z)
+	#rightRopeLog = Vector3(rightLog.global_position.x, rightLog.global_position.y + rightLog.height/4, rightLog.global_position.z)
+	#
+	#update_rope(leftRope, leftRopeSling, leftRopeLog)
+	#update_rope(rightRope, rightRopeSling, rightRopeLog)
 	
 	#Updating pumpkins position and resetting loaded if it is no longer there
 	if loaded && loadedPumpkin != null:
@@ -46,6 +48,7 @@ func _process(delta: float) -> void:
 	#Checking if sling is being grabbed
 	if !beingGrabbed:
 		target.visible = false
+		trajectoryLine.visible = false
 		sling.global_position = lerp(sling.global_position, origin, delta*20)
 		
 		#if loaded and out of pull back deadzone shoot pumpkin once you get back to pull back deadzone
@@ -67,36 +70,47 @@ func _process(delta: float) -> void:
 			
 			loaded = false
 			loadedPumpkin = null
-	elif beingGrabbed && loaded && loadedPumpkin != null:
-		#Calculate trajectory and display visual 
-		var trajectory = getTrajectory(sling, origin)
-		var pumpkinPos = loadedPumpkin.global_position
-		var gravity = loadedPumpkin.gravity
-		
-		var landing_pos = Vector3(0, 0, 0)
 			
-		var a = 0.5 * gravity.y
-		var b = trajectory.y
-		var c = pumpkinPos.y 
-		var discriminant = b*b - 4*a*c
-		if discriminant >= 0:
-			var t = (-b - sqrt(discriminant)) / (2*a)
-			if t > 0:
-				landing_pos = pumpkinPos + trajectory * t + 0.5 * gravity * t * t
+	#Trajectory Prediction
+	elif beingGrabbed && loaded && loadedPumpkin != null:
 		
+		var velocity = getTrajectory(sling, origin)
+		var startPos = loadedPumpkin.global_position
+		var gravity = loadedPumpkin.gravity
+		var points = []
+		var numPoints = 10
+		
+		var a = 0.5 * gravity.y
+		var b = velocity.y
+		var c = startPos.y
+		var landingPos = (-b - sqrt(b*b - 4*a*c)) / (2*a)
+		
+		#Polling trajectory points
+		points.append(startPos)
+		for i in numPoints:
+			var time = landingPos * float(i) / float(numPoints - 1)
+			var polledPos = startPos + velocity * time + 0.5 * gravity * time * time
+			points.append(polledPos)
+			
 		#Pumpking landing target
+		target.global_position = points[-1]
 		target.visible = true
-		target.global_position = landing_pos
+		
+		#Trajectory line
+		var curve = Curve3D.new()
+
+		for p in points:
+			curve.add_point(p)
+
+		trajectoryPath.curve = curve
+		trajectoryLine.visible = true
 		
 	else:
 		target.visible = false
+		trajectoryLine.visible = false
 	
 
 func getTrajectory(s, o):
-	#var offset = s.global_position.distance_to(o)
-	#var direction = (o - s.global_position).normalized()
-	#return direction * offset * launchMult
-	
 	return (o - s.global_position) * launchMult
 
 func update_rope(cylinder, start, end):
