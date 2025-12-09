@@ -38,6 +38,9 @@ func _process(delta: float) -> void:
 	updateRope(leftRope, leftStart, leftRopeSling.global_position, 0.025, 6)
 	updateRope(rightRope, rightStart, rightRopeSling.global_position, 0.025, 6)
 	
+	leftRope.visible = true
+	rightRope.visible = true
+	
 	#Updating pumpkins position and resetting loaded if it is no longer there
 	if loaded && loadedPumpkin != null:
 		loadedPumpkin.global_position = slingArea.global_position
