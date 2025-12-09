@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cnfyj80sfpkq3"]
+[gd_scene load_steps=21 format=3 uid="uid://cnfyj80sfpkq3"]
 
 [ext_resource type="Script" uid="uid://b0arcax67joif" path="res://Scripts/initializevr.gd" id="1_ua3oe"]
 [ext_resource type="Texture2D" uid="uid://ujlhjpujhisj" path="res://Resources/Textures/sky.png" id="2_3n5g3"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cy6tf6pp8tta6" path="res://Scenes/Objects/vine.tscn" id="5_8o4mi"]
 [ext_resource type="Script" uid="uid://cf6yojo8rcx4y" path="res://Scripts/Slingshot/slingshot.gd" id="6_8o4mi"]
 [ext_resource type="Texture2D" uid="uid://sntfeilnq72k" path="res://Resources/Textures/grass.jpg" id="6_ebto2"]
+[ext_resource type="Script" uid="uid://ddpj0xomrl5eg" path="res://Scripts/Sign Score/sign.gd" id="9_yqnnc"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ebto2"]
 panorama = ExtResource("2_3n5g3")
@@ -44,6 +45,12 @@ radius = 0.3
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebto2"]
 transparency = 1
 albedo_color = Color(1, 0, 0, 0.4627451)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iswhu"]
+albedo_color = Color(0.700176, 0.38988283, 0.015236197, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdyhi"]
+albedo_color = Color(0.5190005, 0.28110364, 0.008074824, 1)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ua3oe")
@@ -149,6 +156,21 @@ material_override = SubResource("StandardMaterial3D_ebto2")
 inner_radius = 0.8
 sides = 20
 ring_sides = 10
+
+[node name="Sign-Post" type="Node3D" parent="."]
+transform = Transform3D(0.98451245, 0, 0.17531517, 0, 1, 0, -0.17531517, 0, 0.98451245, -0.8324139, 0.63816595, -4.04626)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Sign-Post"]
+transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 0.125, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_iswhu")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Sign-Post"]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, -0.7298831, 0)
+material_override = SubResource("StandardMaterial3D_cdyhi")
+
+[node name="Label3D" type="Label3D" parent="Sign-Post"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.11510253)
+script = ExtResource("9_yqnnc")
 
 [connection signal="timeout" from="GameManager/AdvanceTimer" to="GameManager" method="_on_advance_timer_timeout"]
 [connection signal="button_pressed" from="Player/Left" to="Player" method="_on_left_button_pressed"]
