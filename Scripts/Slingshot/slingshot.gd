@@ -3,9 +3,18 @@ extends Node3D
 @onready var sling = $Sling
 @onready var slingArea = $Sling/SlingArea
 
+@onready var leftRope = $LeftRope
+@onready var rightRope = $RightRope
+@onready var leftLog = $LeftLog
+@onready var rightLog = $RightLog
+@onready var leftRopeSling = $Sling/leftRopeConnect
+@onready var rightRopeSling = $Sling/rightRopeConnect
+
 @onready var target = $Target
+@onready var arc = $ArcPrediction
 
 @onready var origin = sling.global_position
+@onready var originRotation = sling.rotation
 
 var loaded = false
 var loadedPumpkin = null
@@ -20,6 +29,15 @@ var startPos
 
 func _process(delta: float) -> void:
 	
+	#Update ropes
+	var leftStart = leftLog.global_position
+	leftStart.y = 1.3
+	var rightStart = rightLog.global_position
+	rightStart.y = 1.3
+	
+	updateRope(leftRope, leftStart, leftRopeSling.global_position, 0.025, 6)
+	updateRope(rightRope, rightStart, rightRopeSling.global_position, 0.025, 6)
+	
 	#Updating pumpkins position and resetting loaded if it is no longer there
 	if loaded && loadedPumpkin != null:
 		loadedPumpkin.global_position = slingArea.global_position
@@ -29,7 +47,11 @@ func _process(delta: float) -> void:
 	#Checking if sling is being grabbed
 	if !beingGrabbed:
 		target.visible = false
+		arc.visible = false
+		
+		#Return sling to normal position
 		sling.global_position = lerp(sling.global_position, origin, delta*20)
+		sling.rotation = originRotation
 		
 		#if loaded and out of pull back deadzone shoot pumpkin once you get back to pull back deadzone
 		#when shooting pumpkin make sure to turn pumpkin area back on
@@ -72,14 +94,54 @@ func _process(delta: float) -> void:
 		target.global_position = landingPos
 		target.visible = true
 		
+		#Show arc
+		var arcResolution = 10   # change this
+
+		var newCurve = Curve3D.new()
+		newCurve.add_point(arc.to_local(startPos))
+		for i in range(arcResolution):
+			var t = (landingTime * i) / (arcResolution - 1)
+			var pos = startPos + velocity * t + 0.5 * gravity * t * t
+			newCurve.add_point(arc.to_local(pos))
+			
+		arc.curve = newCurve
+		
+		arc.visible = true
+		
+		#Update sling rotation
+		var newOrigin = origin
+		newOrigin.z -= 1
+		var faceOrigin = newOrigin - sling.global_position
+		faceOrigin.y = 0
+		
+		sling.rotation.y = atan2(faceOrigin.x, faceOrigin.z)
+		
 	else:
 		target.visible = false
+		arc.visible = false
+		
+		#Update sling rotation
+		var newOrigin = origin
+		newOrigin.z -= 1
+		var faceOrigin = newOrigin - sling.global_position
+		faceOrigin.y = 0
+		
+		sling.rotation.y = atan2(faceOrigin.x, faceOrigin.z)
 
-func update_rope(cylinder, start, end):
-	var dir = end - start
-	cylinder.global_position = start + dir * 0.5
-	cylinder.height = dir.length()
-	cylinder.look_at(end, Vector3.RIGHT)
+func updateRope(rope, start, end, radius, sides):
+	var mesh = CylinderMesh.new()
+	mesh.top_radius = radius
+	mesh.bottom_radius = radius
+	mesh.height = start.distance_to(end)
+	mesh.radial_segments = sides
+	mesh.rings = 1
+
+	rope.mesh = mesh
+
+	rope.global_position = start.lerp(end, 0.5)
+
+	rope.look_at(end, Vector3.UP)
+	rope.rotate_object_local(Vector3.RIGHT, deg_to_rad(90))
 
 func _on_sling_area_area_entered(area: Area3D) -> void:
 	if !loaded && area.name == "PumpkinArea":
