@@ -51,6 +51,11 @@ albedo_color = Color(0.700176, 0.38988283, 0.015236197, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdyhi"]
 albedo_color = Color(0.5190005, 0.28110364, 0.008074824, 1)
+[sub_resource type="Curve3D" id="Curve3D_ebto2"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ebto2"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yqnnc"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ua3oe")
@@ -136,9 +141,9 @@ radius = 0.1
 height = 1.5
 
 [node name="Sling" type="CSGTorus3D" parent="Slingshot"]
-transform = Transform3D(1, 0, 0, 0, -0.64278764, -0.76604444, 0, 0.76604444, -0.64278764, 0, 1.082097, 0)
+transform = Transform3D(1, 0, 0, 0, -0.64278764, -0.76604444, 0, 0.76604444, -0.64278764, 0, 1.2, 0)
 material_override = SubResource("StandardMaterial3D_3n5g3")
-inner_radius = 0.2
+inner_radius = 0.22
 outer_radius = 0.3
 sides = 20
 ring_sides = 10
@@ -149,6 +154,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12365246, 0.01870814)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Slingshot/Sling/SlingArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08105409, -0.011571914)
 shape = SubResource("CylinderShape3D_8o4mi")
+
+[node name="leftRopeConnect" type="Node3D" parent="Slingshot/Sling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
+
+[node name="rightRopeConnect" type="Node3D" parent="Slingshot/Sling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
 
 [node name="Target" type="CSGTorus3D" parent="Slingshot"]
 visible = false
@@ -171,6 +182,34 @@ material_override = SubResource("StandardMaterial3D_cdyhi")
 [node name="Label3D" type="Label3D" parent="Sign-Post"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.11510253)
 script = ExtResource("9_yqnnc")
+[node name="ArcPrediction" type="Path3D" parent="Slingshot"]
+visible = false
+curve = SubResource("Curve3D_ebto2")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Slingshot/ArcPrediction"]
+polygon = PackedVector2Array(0, 0, 0, 0.1, 0.1, 0.1, 0.1, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_ebto2")
+
+[node name="LeftRope" type="MeshInstance3D" parent="Slingshot"]
+visible = false
+material_override = SubResource("StandardMaterial3D_3n5g3")
+mesh = SubResource("CylinderMesh_ebto2")
+
+[node name="RightRope" type="MeshInstance3D" parent="Slingshot"]
+visible = false
+material_override = SubResource("StandardMaterial3D_3n5g3")
+mesh = SubResource("CylinderMesh_yqnnc")
 
 [connection signal="timeout" from="GameManager/AdvanceTimer" to="GameManager" method="_on_advance_timer_timeout"]
 [connection signal="button_pressed" from="Player/Left" to="Player" method="_on_left_button_pressed"]
