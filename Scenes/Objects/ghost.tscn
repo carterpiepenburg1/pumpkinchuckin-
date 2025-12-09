@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=3 uid="uid://ccbx2xc3mq5e6"]
+
+[ext_resource type="Script" uid="uid://cy27qcndlrr8r" path="res://Scripts/enemy/ghost.gd" id="1_fgfit"]
+[ext_resource type="Script" uid="uid://c52xympfjpqfp" path="res://Scripts/enemy/enemy.gd" id="2_iyro3"]
+
+[sub_resource type="Animation" id="Animation_i2hje"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_7ifby"]
+resource_name = "Scarecrow"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 2, 1, 0.17364818, 0, 0, 0.9848077)
+
+[sub_resource type="Animation" id="Animation_fgfit"]
+resource_name = "ghost"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(-0.3, 1, 0, 0, 0, 0, 1, 0, 0, 0, 4, 1, 0, 3.0942752, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ink2j"]
+_data = {
+&"RESET": SubResource("Animation_i2hje"),
+&"Scarecrow": SubResource("Animation_7ifby"),
+&"ghost": SubResource("Animation_fgfit")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vm7cc"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_osb2a"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fgfit"]
+size = Vector3(0.1, 1, 1)
+
+[node name="Ghost" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+script = ExtResource("1_fgfit")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ink2j")
+}
+autoplay = "ghost"
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="Body" type="CSGBox3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+size = Vector3(0.1, 1, 1)
+
+[node name="Right Eye" type="CSGTorus3D" parent="Model"]
+transform = Transform3D(-4.3711378e-08, 0.9999998, 0, -0.99999976, -4.371138e-08, 0, 0, 0, 0.99999964, 0.069, 0.3, -0.172)
+material_override = SubResource("StandardMaterial3D_vm7cc")
+inner_radius = 0.03
+outer_radius = 0.06
+
+[node name="Left Eye" type="CSGTorus3D" parent="Model"]
+transform = Transform3D(-4.3711363e-08, 0.9999999, 0, -0.9999994, -4.3711385e-08, 0, 0, 0, 0.99999946, 0.069, 0.3, 0.172)
+material_override = SubResource("StandardMaterial3D_osb2a")
+inner_radius = 0.03
+outer_radius = 0.06
+
+[node name="EnemyArea" type="Area3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999996, 0, 0, 0)
+script = ExtResource("2_iyro3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/EnemyArea"]
+shape = SubResource("BoxShape3D_fgfit")
+
+[connection signal="area_entered" from="Model/EnemyArea" to="Model/EnemyArea" method="_on_area_entered"]
