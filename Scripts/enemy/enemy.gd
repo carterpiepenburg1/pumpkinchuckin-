@@ -1,6 +1,6 @@
 extends Area3D
 
-@onready var parent = get_parent()
+@onready var parent = get_parent().get_parent()
 var newPos
 		
 func _ready() -> void:
@@ -22,6 +22,6 @@ func _on_area_entered(area: Area3D) -> void:
 		set_deferred("monitoring", false)
 		
 		#Add points and other stuff when you hit enemy
-		
+		Globals.score += parent.pointValue
 		queue_free()
 		
