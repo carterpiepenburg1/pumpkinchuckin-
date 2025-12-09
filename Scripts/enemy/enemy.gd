@@ -1,7 +1,6 @@
 extends Area3D
 
 @onready var parent = get_parent()
-@onready var timer = $"../../Timer"
 var newPos
 		
 func _ready() -> void:
@@ -13,14 +12,6 @@ func _process(delta: float) -> void:
 		
 func advance():
 	newPos = Vector3(global_position.x, global_position.y, global_position.z + Globals.advanceAmount)
-	
-		
-func _on_timer_timeout() -> void:
-	parent.visible = true
-	
-	#Enable area3D
-	set_deferred("monitorable", true)
-	set_deferred("monitoring", true)
 
 func _on_area_entered(area: Area3D) -> void:
 	if area.name == "PumpkinArea" && visible:
@@ -30,5 +21,7 @@ func _on_area_entered(area: Area3D) -> void:
 		set_deferred("monitorable", false)
 		set_deferred("monitoring", false)
 		
-		timer.start()
+		#Add points and other stuff when you hit enemy
+		
+		queue_free()
 		

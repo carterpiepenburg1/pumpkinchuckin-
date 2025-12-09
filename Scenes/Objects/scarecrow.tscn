@@ -61,10 +61,6 @@ albedo_color = Color(0.1254902, 0.43529412, 0.81960785, 1)
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 script = ExtResource("1_i2hje")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_ink2j")
@@ -133,5 +129,4 @@ script = ExtResource("1_7ifby")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/EnemyArea"]
 shape = SubResource("CylinderShape3D_gg80o")
 
-[connection signal="timeout" from="Timer" to="Model/EnemyArea" method="_on_timer_timeout"]
 [connection signal="area_entered" from="Model/EnemyArea" to="Model/EnemyArea" method="_on_area_entered"]
