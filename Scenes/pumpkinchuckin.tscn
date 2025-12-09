@@ -1,16 +1,24 @@
-[gd_scene load_steps=14 format=3 uid="uid://cnfyj80sfpkq3"]
+[gd_scene load_steps=18 format=3 uid="uid://cnfyj80sfpkq3"]
 
 [ext_resource type="Script" uid="uid://b0arcax67joif" path="res://Scripts/initializevr.gd" id="1_ua3oe"]
+[ext_resource type="Texture2D" uid="uid://ujlhjpujhisj" path="res://Resources/Textures/sky.png" id="2_3n5g3"]
 [ext_resource type="Script" uid="uid://blp7t2rm6f3sg" path="res://Scripts/Player/player.gd" id="2_c37g7"]
+[ext_resource type="Script" uid="uid://yripqjx66c00" path="res://Scripts/game_manager.gd" id="2_yqnnc"]
 [ext_resource type="Script" uid="uid://dnxoog51swnsj" path="res://Scripts/Player/hand.gd" id="3_gfff3"]
-[ext_resource type="PackedScene" uid="uid://3bm4j61b1rvo" path="res://Scenes/Objects/enemy.tscn" id="5_3odlv"]
 [ext_resource type="PackedScene" uid="uid://cy6tf6pp8tta6" path="res://Scenes/Objects/vine.tscn" id="5_8o4mi"]
 [ext_resource type="Script" uid="uid://cf6yojo8rcx4y" path="res://Scripts/Slingshot/slingshot.gd" id="6_8o4mi"]
+[ext_resource type="Texture2D" uid="uid://sntfeilnq72k" path="res://Resources/Textures/grass.jpg" id="6_ebto2"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ebto2"]
+panorama = ExtResource("2_3n5g3")
+
+[sub_resource type="Sky" id="Sky_yqnnc"]
+sky_material = SubResource("PanoramaSkyMaterial_ebto2")
 
 [sub_resource type="Environment" id="Environment_2t1jq"]
-background_mode = 1
+background_mode = 2
 background_color = Color(0.76037085, 0.97431797, 0.9702292, 1)
-fog_enabled = true
+sky = SubResource("Sky_yqnnc")
 fog_light_color = Color(0.73032373, 0.96586627, 0.9999998, 1)
 fog_sun_scatter = 0.5
 fog_density = 0.0
@@ -18,8 +26,10 @@ fog_density = 0.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_gfff3"]
 radius = 0.049555775
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3odlv"]
-albedo_color = Color(0.9137255, 0.44705883, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqnnc"]
+albedo_color = Color(1, 0.62, 0.62, 1)
+albedo_texture = ExtResource("6_ebto2")
+uv1_scale = Vector3(2000, 2000, 2000)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8o4mi"]
 albedo_color = Color(0.35095242, 0.15484291, 0.07356518, 1)
@@ -37,6 +47,13 @@ albedo_color = Color(1, 0, 0, 0.4627451)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ua3oe")
+
+[node name="GameManager" type="Node3D" parent="."]
+script = ExtResource("2_yqnnc")
+
+[node name="AdvanceTimer" type="Timer" parent="GameManager"]
+wait_time = 5.0
+autostart = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.08686353, 0.8868179, -0.45388195, -0.15191406, 0.46206695, 0.873737, 0.9845694, -0.006944829, 0.17485687, 0, 5.125532, 0)
@@ -79,47 +96,24 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Right/Area"]
 shape = SubResource("SphereShape3D_gfff3")
 
-[node name="Enemies" type="Node3D" parent="."]
-
-[node name="Enemy" parent="Enemies" instance=ExtResource("5_3odlv")]
-transform = Transform3D(-0.12728967, 0, -0.99186563, 0, 0.9999999, 0, 0.9918657, 0, -0.12728964, -0.34657764, 0.99555767, -13.321085)
-
-[node name="Enemy2" parent="Enemies" instance=ExtResource("5_3odlv")]
-transform = Transform3D(-0.12728967, 0, -0.99186563, 0, 0.9999999, 0, 0.9918657, 0, -0.12728964, 3.1400938, 0.99555767, -13.321085)
-
-[node name="Enemy3" parent="Enemies" instance=ExtResource("5_3odlv")]
-transform = Transform3D(-0.12728967, 0, -0.99186563, 0, 0.9999999, 0, 0.9918657, 0, -0.12728964, -4.0380025, 0.99555767, -13.321085)
-
-[node name="Enemy4" parent="Enemies" instance=ExtResource("5_3odlv")]
-transform = Transform3D(-0.12728967, 0, -0.99186563, 0, 0.9999999, 0, 0.9918657, 0, -0.12728964, -2.3465776, 0.99555767, -17.321085)
-
-[node name="Enemy7" parent="Enemies" instance=ExtResource("5_3odlv")]
-transform = Transform3D(-0.12728967, 0, -0.99186563, 0, 0.9999999, 0, 0.9918657, 0, -0.12728964, 4.6534224, 0.99555767, -17.321085)
-
-[node name="Enemy5" parent="Enemies" instance=ExtResource("5_3odlv")]
-transform = Transform3D(-0.12728967, 0, -0.99186563, 0, 0.9999999, 0, 0.9918657, 0, -0.12728964, 1.1400938, 0.99555767, -17.321085)
-
-[node name="Enemy6" parent="Enemies" instance=ExtResource("5_3odlv")]
-transform = Transform3D(-0.12728967, 0, -0.99186563, 0, 0.9999999, 0, 0.9918657, 0, -0.12728964, -6.0380025, 0.99555767, -17.321085)
-
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="Floor" type="CSGBox3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-material_override = SubResource("StandardMaterial3D_3odlv")
 size = Vector3(4000, 1, 4000)
+material = SubResource("StandardMaterial3D_yqnnc")
 
-[node name="Vine" parent="." instance=ExtResource("5_8o4mi")]
+[node name="Vine" parent="Environment" instance=ExtResource("5_8o4mi")]
 transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 1.7, 0, 0)
 
-[node name="Vine3" parent="." instance=ExtResource("5_8o4mi")]
+[node name="Vine3" parent="Environment" instance=ExtResource("5_8o4mi")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.7, 0, 0)
 
-[node name="Vine2" parent="." instance=ExtResource("5_8o4mi")]
+[node name="Vine2" parent="Environment" instance=ExtResource("5_8o4mi")]
 transform = Transform3D(0.00034902245, 0, 0.49999985, 0, 0.5, 0, -0.49999985, 0, 0.00034902245, 0, 0, 1.7)
 
 [node name="Slingshot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.93379486)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.7283299)
 script = ExtResource("6_8o4mi")
 
 [node name="RightLog" type="CSGCylinder3D" parent="Slingshot"]
@@ -133,20 +127,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.75, 0)
 material_override = SubResource("StandardMaterial3D_8o4mi")
 radius = 0.1
 height = 1.5
-
-[node name="RightRope" type="CSGCylinder3D" parent="Slingshot"]
-transform = Transform3D(-4.371139e-08, 0.99999994, 0, -1, -4.3711385e-08, 0, 0, 0, 1, 0.6, 1.082097, 0)
-visible = false
-material_override = SubResource("StandardMaterial3D_3n5g3")
-radius = 0.025
-height = 0.75
-
-[node name="LeftRope" type="CSGCylinder3D" parent="Slingshot"]
-transform = Transform3D(-4.371139e-08, -0.99999994, 0, 1, -4.3711385e-08, 0, 0, 0, 1, -0.6, 1.082097, 0)
-visible = false
-material_override = SubResource("StandardMaterial3D_3n5g3")
-radius = 0.025
-height = 0.75
 
 [node name="Sling" type="CSGTorus3D" parent="Slingshot"]
 transform = Transform3D(1, 0, 0, 0, -0.64278764, -0.76604444, 0, 0.76604444, -0.64278764, 0, 1.082097, 0)
@@ -170,6 +150,7 @@ inner_radius = 0.8
 sides = 20
 ring_sides = 10
 
+[connection signal="timeout" from="GameManager/AdvanceTimer" to="GameManager" method="_on_advance_timer_timeout"]
 [connection signal="button_pressed" from="Player/Left" to="Player" method="_on_left_button_pressed"]
 [connection signal="button_released" from="Player/Left" to="Player" method="_on_left_button_released"]
 [connection signal="button_pressed" from="Player/Right" to="Player" method="_on_right_button_pressed"]

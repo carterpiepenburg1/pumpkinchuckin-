@@ -3,18 +3,7 @@ extends Node3D
 @onready var sling = $Sling
 @onready var slingArea = $Sling/SlingArea
 
-@onready var leftRope = $LeftRope
-@onready var rightRope = $RightRope
-@onready var leftLog = $LeftLog
-@onready var rightLog = $RightLog
-
 @onready var target = $Target
-
-#Ropes
-var leftRopeSling
-var leftRopeLog
-var rightRopeSling
-var rightRopeLog
 
 @onready var origin = sling.global_position
 
@@ -26,16 +15,10 @@ var beingGrabbed = false
 var deadzoneDistance = 0.1
 var launchMult = 40
 
+var velocity
+var startPos
+
 func _process(delta: float) -> void:
-	
-	#Updating ropes
-	leftRopeSling = Vector3(sling.global_position.x - sling.inner_radius - (sling.outer_radius - sling.inner_radius)/2, sling.global_position.y, sling.global_position.z)
-	leftRopeLog = Vector3(leftLog.global_position.x, leftLog.global_position.y + leftLog.height/4, leftLog.global_position.z)
-	rightRopeSling = Vector3(sling.global_position.x + sling.inner_radius + (sling.outer_radius - sling.inner_radius)/2, sling.global_position.y, sling.global_position.z)
-	rightRopeLog = Vector3(rightLog.global_position.x, rightLog.global_position.y + rightLog.height/4, rightLog.global_position.z)
-	
-	update_rope(leftRope, leftRopeSling, leftRopeLog)
-	update_rope(rightRope, rightRopeSling, rightRopeLog)
 	
 	#Updating pumpkins position and resetting loaded if it is no longer there
 	if loaded && loadedPumpkin != null:
@@ -55,8 +38,8 @@ func _process(delta: float) -> void:
 			
 			print("flung pumpkin")
 			
-			loadedPumpkin.velocity = getTrajectory(sling, origin)
-			loadedPumpkin.startPos = loadedPumpkin.global_position
+			loadedPumpkin.velocity = velocity
+			loadedPumpkin.startPos = startPos
 			loadedPumpkin.time = 0.0
 			
 			loadedPumpkin.flung = true
@@ -67,37 +50,30 @@ func _process(delta: float) -> void:
 			
 			loaded = false
 			loadedPumpkin = null
+			
+	#Trajectory Prediction
 	elif beingGrabbed && loaded && loadedPumpkin != null:
-		#Calculate trajectory and display visual 
-		var trajectory = getTrajectory(sling, origin)
-		var pumpkinPos = loadedPumpkin.global_position
+		
+		velocity = (origin - sling.global_position) * launchMult
+		startPos = loadedPumpkin.global_position
 		var gravity = loadedPumpkin.gravity
 		
-		var landing_pos = Vector3(0, 0, 0)
-			
 		var a = 0.5 * gravity.y
-		var b = trajectory.y
-		var c = pumpkinPos.y 
+		var b = velocity.y
+		var c = startPos.y
 		var discriminant = b*b - 4*a*c
-		if discriminant >= 0:
-			var t = (-b - sqrt(discriminant)) / (2*a)
-			if t > 0:
-				landing_pos = pumpkinPos + trajectory * t + 0.5 * gravity * t * t
+		if discriminant < 0:
+			discriminant = 0
+		var landingTime = (-b - sqrt(discriminant)) / (2*a)
 		
 		#Pumpking landing target
+		var landingPos = startPos + velocity * landingTime + 0.5 * gravity * landingTime * landingTime
+		
+		target.global_position = landingPos
 		target.visible = true
-		target.global_position = landing_pos
 		
 	else:
 		target.visible = false
-	
-
-func getTrajectory(s, o):
-	#var offset = s.global_position.distance_to(o)
-	#var direction = (o - s.global_position).normalized()
-	#return direction * offset * launchMult
-	
-	return (o - s.global_position) * launchMult
 
 func update_rope(cylinder, start, end):
 	var dir = end - start
