@@ -21,9 +21,9 @@ tracks/0/type = "rotation_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Model")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 2, 1, 0.17364818, 0, 0, 0.9848077)
+tracks/0/keys = PackedFloat32Array(0, 1, -0.044, 0, 0, 0.999, 2, 1, 0.17364818, 0, 0, 0.9848077)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ink2j"]
 _data = {

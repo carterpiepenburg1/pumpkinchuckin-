@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccbx2xc3mq5e6"]
+[gd_scene load_steps=10 format=3 uid="uid://bb50hf57wyqvr"]
 
-[ext_resource type="Script" uid="uid://cy27qcndlrr8r" path="res://Scripts/enemy/ghost.gd" id="1_fgfit"]
+[ext_resource type="Script" path="res://Scripts/enemy/ghost.gd" id="1_fgfit"]
 [ext_resource type="Script" uid="uid://c52xympfjpqfp" path="res://Scripts/enemy/enemy.gd" id="2_iyro3"]
 
 [sub_resource type="Animation" id="Animation_i2hje"]
@@ -12,6 +12,17 @@ tracks/0/path = NodePath("Model")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_7ifby"]
 resource_name = "Scarecrow"
@@ -27,15 +38,19 @@ tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 2, 1, 0.17364818, 0, 0, 0.9
 
 [sub_resource type="Animation" id="Animation_fgfit"]
 resource_name = "ghost"
-length = 8.0
+length = 16.0
 loop_mode = 1
-tracks/0/type = "position_3d"
+tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Model")
-tracks/0/interp = 2
+tracks/0/path = NodePath("Model:position:y")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(-0.3, 1, 0, 0, 0, 0, 1, 0, 0, 0, 4, 1, 0, 3.0942752, 0)
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 1.0666667, -0.006366249, 3, -0.8666667, -0.006901264, 0.25, 0, 3, -0.25, 0, 1.3000002, -0.006901264, 0, -0.86666775, -0.016673688, 0.25, 0),
+"times": PackedFloat32Array(0, 6.0333333, 8.033333, 14.033333, 16.033335)
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ink2j"]
 _data = {

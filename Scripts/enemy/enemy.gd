@@ -8,10 +8,10 @@ func _ready() -> void:
 		
 func _process(delta: float) -> void:
 	if newPos != null:
-		parent.global_position = lerp(global_position, newPos, delta*20)
+		parent.global_position = lerp(parent.global_position, newPos, delta*20)
 		
 func advance():
-	newPos = Vector3(global_position.x, global_position.y, global_position.z + Globals.advanceAmount)
+	newPos = Vector3(parent.global_position.x, parent.global_position.y, parent.global_position.z + Globals.advanceAmount)
 
 func _on_area_entered(area: Area3D) -> void:
 	if area.name == "PumpkinArea" && visible:

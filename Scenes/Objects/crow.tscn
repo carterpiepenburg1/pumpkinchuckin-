@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://b7ibn23j4120c"]
+[gd_scene load_steps=10 format=3 uid="uid://ck8m5kle2hrx5"]
 
-[ext_resource type="Script" uid="uid://dp66qsoooiesi" path="res://Scripts/enemy/crow.gd" id="1_ta26y"]
+[ext_resource type="Script" path="res://Scripts/enemy/crow.gd" id="1_ta26y"]
 [ext_resource type="Script" uid="uid://c52xympfjpqfp" path="res://Scripts/enemy/enemy.gd" id="2_gclu3"]
 
 [sub_resource type="Animation" id="Animation_i2hje"]
@@ -25,6 +25,17 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 2, 1, 0.17364818, 0, 0, 0.9848077)
 
+[sub_resource type="Animation" id="Animation_ta26y"]
+resource_name = "crow"
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.53333336, 1, 0, 0.18533522, 0)
+
 [sub_resource type="Animation" id="Animation_fgfit"]
 resource_name = "ghost"
 length = 8.0
@@ -36,17 +47,6 @@ tracks/0/path = NodePath("Model")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(-0.3, 1, 0, 0, 0, 0, 1, 0, 0, 0, 4, 1, 0, 3.0942752, 0)
-
-[sub_resource type="Animation" id="Animation_ta26y"]
-resource_name = "crow"
-loop_mode = 1
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Model")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.53333336, 1, 0, 0.18533522, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ink2j"]
 _data = {
@@ -73,7 +73,7 @@ libraries = {
 autoplay = "crow"
 
 [node name="Model" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0.013668781, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0.17218442, 0)
 
 [node name="Body" type="CSGBox3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
