@@ -1,8 +1,9 @@
 extends Node
 
-#Misc
+#Game
 var score = 0
-var roundNum = 0
+var roundNum = 1
+var roundTime = 80
 
 #Enemy placement
 var enemyStartDistance = 30

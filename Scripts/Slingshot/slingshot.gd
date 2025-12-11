@@ -22,7 +22,7 @@ var loadedPumpkin = null
 var beingGrabbed = false
 
 var deadzoneDistance = 0.1
-var launchMult = 40
+var launchMult = 60
 
 var velocity
 var startPos

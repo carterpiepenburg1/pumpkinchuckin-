@@ -3,4 +3,4 @@ extends Label3D
 
 
 func _process(delta: float) -> void:
-	text = "Score:\n %d" %Globals.score
+	text = "Round: %d \n Score:\n %d" % [Globals.roundNum, Globals.score]
