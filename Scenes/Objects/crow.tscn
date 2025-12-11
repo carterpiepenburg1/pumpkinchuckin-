@@ -34,7 +34,7 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("Model")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.53333336, 1, 0, 0.18533522, 0)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.53333336, 1, 0, 0.1, 0)
 
 [sub_resource type="Animation" id="Animation_fgfit"]
 resource_name = "ghost"
@@ -73,12 +73,12 @@ libraries = {
 autoplay = "crow"
 
 [node name="Model" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0.17218442, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 
 [node name="Body" type="CSGBox3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_ta26y")
-size = Vector3(0.1, 0.2, 0.4)
+size = Vector3(0.25, 0.25, 0.5)
 
 [node name="EnemyArea" type="Area3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999996, 0, 0, 0)

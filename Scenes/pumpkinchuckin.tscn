@@ -66,7 +66,8 @@ script = ExtResource("2_yqnnc")
 
 [node name="AdvanceTimer" type="Timer" parent="GameManager"]
 wait_time = 5.0
-autostart = true
+
+[node name="RoundTimer" type="Timer" parent="GameManager"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.08686353, 0.8868179, -0.45388195, -0.15191406, 0.46206695, 0.873737, 0.9845694, -0.006944829, 0.17485687, 0, 5.125532, 0)
@@ -122,11 +123,8 @@ transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 
 [node name="Vine3" parent="Environment" instance=ExtResource("5_8o4mi")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.7, 0, 0)
 
-[node name="Vine2" parent="Environment" instance=ExtResource("5_8o4mi")]
-transform = Transform3D(0.00034902245, 0, 0.49999985, 0, 0.5, 0, -0.49999985, 0, 0.00034902245, 0, 0, 1.7)
-
 [node name="Slingshot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.7283299)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.89874977)
 script = ExtResource("6_8o4mi")
 
 [node name="RightLog" type="CSGCylinder3D" parent="Slingshot"]
@@ -199,11 +197,12 @@ material_override = SubResource("StandardMaterial3D_3n5g3")
 mesh = SubResource("CylinderMesh_yqnnc")
 
 [node name="Sign-Post" type="Node3D" parent="."]
-transform = Transform3D(0.98451245, 0, 0.17531517, 0, 1, 0, -0.17531517, 0, 0.98451245, -0.8324139, 0.63816595, -4.04626)
+transform = Transform3D(0.98451245, 0, 0.17531517, 0, 1, 0, -0.17531517, 0, 0.98451245, -0.8324139, 0.6181954, -4.04626)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Sign-Post"]
-transform = Transform3D(1, 0, 0, 0, 0.6, 0, 0, 0, 0.125, 0, 0, 0)
+transform = Transform3D(1, 0, -9.313226e-09, 0, 0.6, 0, 7.4505806e-08, 0, 0.125, 0, -0.009173572, 0)
 material_override = SubResource("StandardMaterial3D_iswhu")
+size = Vector3(1, 1.2046509, 1)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Sign-Post"]
 transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, -0.7298831, 0)
@@ -211,9 +210,14 @@ material_override = SubResource("StandardMaterial3D_cdyhi")
 
 [node name="Label3D" type="Label3D" parent="Sign-Post"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.11510253)
+text = "Round: 1
+Score: 
+0
+"
 script = ExtResource("9_yqnnc")
 
 [connection signal="timeout" from="GameManager/AdvanceTimer" to="GameManager" method="_on_advance_timer_timeout"]
+[connection signal="timeout" from="GameManager/RoundTimer" to="GameManager" method="_on_round_timer_timeout"]
 [connection signal="button_pressed" from="Player/Left" to="Player" method="_on_left_button_pressed"]
 [connection signal="button_released" from="Player/Left" to="Player" method="_on_left_button_released"]
 [connection signal="button_pressed" from="Player/Right" to="Player" method="_on_right_button_pressed"]

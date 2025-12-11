@@ -4,7 +4,10 @@ extends Area3D
 var newPos
 		
 func _ready() -> void:
-	get_tree().current_scene.get_node("GameManager").enemy_advance.connect(advance)
+	var gm = get_tree().current_scene.get_node("GameManager")
+	gm.enemy_advance.connect(advance)
+	gm.clear_enemies.connect(clearEnemies)
+	
 		
 func _process(delta: float) -> void:
 	if newPos != null:
@@ -12,9 +15,18 @@ func _process(delta: float) -> void:
 		
 func advance():
 	newPos = Vector3(parent.global_position.x, parent.global_position.y, parent.global_position.z + Globals.advanceAmount)
+	
+func clearEnemies():
+	#Do something cool
+	set_deferred("monitorable", false)
+	set_deferred("monitoring", false)
+	
+	parent.queue_free()
 
 func _on_area_entered(area: Area3D) -> void:
 	if area.name == "PumpkinArea" && visible:
+		
+		#Hide model
 		parent.visible = false
 		
 		#Disable area3D
