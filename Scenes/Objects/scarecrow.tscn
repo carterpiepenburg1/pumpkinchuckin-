@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c52xympfjpqfp" path="res://Scripts/enemy/enemy.gd" id="1_7ifby"]
 [ext_resource type="Script" uid="uid://bh1xxfkqxn2qr" path="res://Scripts/enemy/scarecrow.gd" id="1_i2hje"]
 
-[sub_resource type="Animation" id="Animation_i2hje"]
+[sub_resource type="Animation" id="Animation_oh1pf"]
 length = 0.001
 tracks/0/type = "rotation_3d"
 tracks/0/imported = false
@@ -13,8 +13,8 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_7ifby"]
-resource_name = "Scarecrow"
+[sub_resource type="Animation" id="Animation_1qxng"]
+resource_name = "scarecrow"
 length = 4.0
 loop_mode = 1
 tracks/0/type = "rotation_3d"
@@ -23,12 +23,12 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("Model")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, -0.044, 0, 0, 0.999, 2, 1, 0.17364818, 0, 0, 0.9848077)
+tracks/0/keys = PackedFloat32Array(0, 1, -0.035, 0, 0, 0.999, 2, 1, 0.13052617, 0, 0, 0.9914448, 4, 1, -0.035, 0, 0, 0.999)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ink2j"]
 _data = {
-&"RESET": SubResource("Animation_i2hje"),
-&"Scarecrow": SubResource("Animation_7ifby")
+&"RESET": SubResource("Animation_oh1pf"),
+&"scarecrow": SubResource("Animation_1qxng")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i2hje"]
@@ -65,9 +65,10 @@ script = ExtResource("1_i2hje")
 libraries = {
 &"": SubResource("AnimationLibrary_ink2j")
 }
-autoplay = "Scarecrow"
+autoplay = "scarecrow"
 
 [node name="Model" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Head" type="CSGSphere3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.99147815, 0.13027126, 0, -0.13027126, 0.99147815, 0, 0.7131681, -0.093703836)
@@ -129,4 +130,5 @@ script = ExtResource("1_7ifby")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/EnemyArea"]
 shape = SubResource("CylinderShape3D_gg80o")
 
+[connection signal="animation_finished" from="AnimationPlayer" to="Model/EnemyArea" method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Model/EnemyArea" to="Model/EnemyArea" method="_on_area_entered"]

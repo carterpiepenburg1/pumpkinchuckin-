@@ -1,6 +1,7 @@
 extends Area3D
 
 @onready var parent = get_parent().get_parent()
+@onready var pointLabel = load("res://Scenes/Objects/pointLabel.tscn")
 var newPos
 		
 func _ready() -> void:
@@ -35,5 +36,16 @@ func _on_area_entered(area: Area3D) -> void:
 		
 		#Add points and other stuff when you hit enemy
 		Globals.score += parent.pointValue
-		queue_free()
 		
+		var newPointLabel = pointLabel.instantiate()
+		newPointLabel.points = parent.pointValue
+		get_tree().current_scene.add_child(newPointLabel)
+		newPointLabel.global_position = parent.global_position
+		newPointLabel.rotation.y = deg_to_rad(270)
+		
+		queue_free()
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "points":
+		queue_free()

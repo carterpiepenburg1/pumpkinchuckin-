@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bb50hf57wyqvr"]
+[gd_scene load_steps=9 format=3 uid="uid://bb50hf57wyqvr"]
 
-[ext_resource type="Script" path="res://Scripts/enemy/ghost.gd" id="1_fgfit"]
+[ext_resource type="Script" uid="uid://cy27qcndlrr8r" path="res://Scripts/enemy/ghost.gd" id="1_fgfit"]
 [ext_resource type="Script" uid="uid://c52xympfjpqfp" path="res://Scripts/enemy/enemy.gd" id="2_iyro3"]
 
 [sub_resource type="Animation" id="Animation_i2hje"]
@@ -24,18 +24,6 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0)
 }
 
-[sub_resource type="Animation" id="Animation_7ifby"]
-resource_name = "Scarecrow"
-length = 4.0
-loop_mode = 1
-tracks/0/type = "rotation_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Model")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 2, 1, 0.17364818, 0, 0, 0.9848077)
-
 [sub_resource type="Animation" id="Animation_fgfit"]
 resource_name = "ghost"
 length = 16.0
@@ -55,7 +43,6 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ink2j"]
 _data = {
 &"RESET": SubResource("Animation_i2hje"),
-&"Scarecrow": SubResource("Animation_7ifby"),
 &"ghost": SubResource("Animation_fgfit")
 }
 
