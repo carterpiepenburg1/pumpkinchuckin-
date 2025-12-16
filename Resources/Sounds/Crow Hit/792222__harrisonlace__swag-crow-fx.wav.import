@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bg8pj1r5ww84r"
+path="res://.godot/imported/792222__harrisonlace__swag-crow-fx.wav-7863f89f13709638e0e63c317809b913.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/Crow Hit/792222__harrisonlace__swag-crow-fx.wav"
+dest_files=["res://.godot/imported/792222__harrisonlace__swag-crow-fx.wav-7863f89f13709638e0e63c317809b913.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

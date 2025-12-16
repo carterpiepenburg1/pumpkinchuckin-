@@ -168,22 +168,22 @@ sides = 20
 ring_sides = 10
 
 [node name="ArcPrediction" type="Path3D" parent="Slingshot"]
-visible = false
 curve = SubResource("Curve3D_ebto2")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Slingshot/ArcPrediction"]
-polygon = PackedVector2Array(0, 0, 0, 0.1, 0.1, 0.1, 0.1, 0)
+polygon = PackedVector2Array(-0.05, -0.05, -0.05, 0.05, 0.05, 0.05, 0.05, -0.05)
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
 path_interval = 1.0
 path_simplify_angle = 0.0
 path_rotation = 2
-path_rotation_accurate = false
-path_local = false
+path_rotation_accurate = true
+path_local = true
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
+smooth_faces = true
 material = SubResource("StandardMaterial3D_ebto2")
 
 [node name="LeftRope" type="MeshInstance3D" parent="Slingshot"]

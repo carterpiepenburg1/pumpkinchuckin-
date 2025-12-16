@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c4pel2iehofst"
+path="res://.godot/imported/679391__adviseme333__wet-thwack.wav-82e71ce08b67d3cd5f24b14d266bfa82.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/Scarecrow Hit/679391__adviseme333__wet-thwack.wav"
+dest_files=["res://.godot/imported/679391__adviseme333__wet-thwack.wav-82e71ce08b67d3cd5f24b14d266bfa82.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
