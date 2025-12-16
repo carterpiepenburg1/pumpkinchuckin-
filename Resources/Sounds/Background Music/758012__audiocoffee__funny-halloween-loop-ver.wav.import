@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bx1n0sn33y8ha"
+path="res://.godot/imported/758012__audiocoffee__funny-halloween-loop-ver.wav-291d38b8eeea542cf4fd67b5fe4f3838.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/Background Music/758012__audiocoffee__funny-halloween-loop-ver.wav"
+dest_files=["res://.godot/imported/758012__audiocoffee__funny-halloween-loop-ver.wav-291d38b8eeea542cf4fd67b5fe4f3838.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

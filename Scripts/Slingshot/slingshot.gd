@@ -108,7 +108,6 @@ func _process(delta: float) -> void:
 			newCurve.add_point(arc.to_local(pos))
 			
 		arc.curve = newCurve
-		
 		arc.visible = true
 		
 		#Update sling rotation
