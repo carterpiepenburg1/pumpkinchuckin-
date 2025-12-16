@@ -7,7 +7,7 @@ var roundTime = 80
 
 #Enemy placement
 var enemyStartDistance = 30
-var rowWidth = 20
+var rowWidth = 15
 var enemiesPerRow = 5
 var enemyDensity = 0.5
 

@@ -40,7 +40,7 @@ func _on_area_entered(area: Area3D) -> void:
 		var newPointLabel = pointLabel.instantiate()
 		newPointLabel.points = parent.pointValue
 		get_tree().current_scene.add_child(newPointLabel)
-		newPointLabel.global_position = parent.global_position
+		newPointLabel.global_position = get_parent().global_position
 		newPointLabel.rotation.y = deg_to_rad(270)
 		
 		queue_free()
