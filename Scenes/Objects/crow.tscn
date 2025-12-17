@@ -35,7 +35,7 @@ _data = {
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fgfit"]
-size = Vector3(0.1, 0.2, 0.4)
+size = Vector3(0.7, 0.4, 0.5)
 
 [node name="Crow" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -51,9 +51,9 @@ autoplay = "crow"
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 
 [node name="Body" type="CSGBox3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9999889, 0, 0, 0, 0.9999889, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_ta26y")
-size = Vector3(0.25, 0.25, 0.5)
+size = Vector3(0.7, 0.4, 0.5)
 
 [node name="EnemyArea" type="Area3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999996, 0, 0, 0)

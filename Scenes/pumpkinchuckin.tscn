@@ -25,7 +25,6 @@ sky_material = SubResource("PanoramaSkyMaterial_ebto2")
 background_mode = 2
 background_color = Color(0.76037085, 0.97431797, 0.9702292, 1)
 sky = SubResource("Sky_yqnnc")
-fog_enabled = true
 fog_sun_scatter = 0.1
 fog_density = 0.025
 
@@ -35,7 +34,7 @@ radius = 0.049555775
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqnnc"]
 albedo_color = Color(1, 0.62, 0.62, 1)
 albedo_texture = ExtResource("6_ebto2")
-uv1_scale = Vector3(2000, 2000, 2000)
+uv1_scale = Vector3(100, 100, 100)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0u05k"]
 albedo_color = Color(7.2196127e-07, 0.4493385, 4.813075e-07, 1)
@@ -155,7 +154,7 @@ volume_db = -10.0
 
 [node name="Floor" type="CSGBox3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-size = Vector3(4000, 1, 4000)
+size = Vector3(200, 1, 200)
 material = SubResource("StandardMaterial3D_yqnnc")
 
 [node name="Vine" parent="Environment" instance=ExtResource("5_8o4mi")]
@@ -165,39 +164,39 @@ transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.7, 0, 0)
 
 [node name="Treeline" type="CSGBox3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -32)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -20)
 material_override = SubResource("StandardMaterial3D_0u05k")
 size = Vector3(80, 10, 1)
 
 [node name="LeftTreeline" type="CSGBox3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 5, 43)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.908644, 5, 17.792053)
 material_override = SubResource("StandardMaterial3D_0ryyh")
-size = Vector3(1, 10, 150)
+size = Vector3(1, 10, 99.58411)
 
 [node name="RightTreeline" type="CSGBox3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 5, 43)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.695984, 5, 19.072021)
 material_override = SubResource("StandardMaterial3D_3n3ex")
-size = Vector3(1, 10, 150)
+size = Vector3(1, 10, 85.58252)
 
 [node name="BackTreeline" type="CSGBox3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 118)
-size = Vector3(80, 10, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5578003, 5, 58.12391)
+size = Vector3(71.37537, 10, 1)
 material = SubResource("StandardMaterial3D_4ixpx")
 
 [node name="Barn" type="CSGBox3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 4, 24)
-size = Vector3(10, 8, 20)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -14.012964, 3.0339003, 14.976358)
+size = Vector3(16.888184, 8, 20)
 material = SubResource("StandardMaterial3D_6di5v")
 
 [node name="MainField" type="CSGBox3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.5, 50)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 12, 0.28124, 29.484943)
 material_override = SubResource("StandardMaterial3D_b176m")
-size = Vector3(35, 1, 80)
+size = Vector3(35, 1, 57.465942)
 
 [node name="SmallField" type="CSGBox3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0.5, 65)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -16.120764, 0.3201046, 40.859116)
 material_override = SubResource("StandardMaterial3D_b176m")
-size = Vector3(25, 1, 50)
+size = Vector3(25, 1, 25.76477)
 
 [node name="Slingshot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.89874977)
