@@ -6,9 +6,20 @@ Slingshot Release:
 whoosh-313320
 Sound Effect by u_6e5q34wi4n from Pixabay
 
+Slingshot Loaded:
+whip-click-107738
+dropping-bag-95101
+Sound Effect by freesound_community from Pixabay
+
 Pumpkin Grow:
 sharp-pop-328170
 Sound Effect by CreatorsHome from Pixabay
+
+Pumpkin Flying Through Air:
+falling-bomb-41038
+Sound Effect by freesound_community from Pixabay
+falling-whistle-cartoon-180579
+Sound Effect by Otto from Pixabay
 
 Grab:
 704749__err0rc0de__grab-item
