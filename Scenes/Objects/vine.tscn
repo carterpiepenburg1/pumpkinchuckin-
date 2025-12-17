@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy6tf6pp8tta6"]
+[gd_scene load_steps=9 format=3 uid="uid://cy6tf6pp8tta6"]
 
 [ext_resource type="Script" uid="uid://c66ebpbgc56iy" path="res://Scripts/Pumkin-Scripts/vineSpawn.gd" id="1_73ut5"]
+[ext_resource type="AudioStream" uid="uid://cglu4r5nh2ep" path="res://Resources/Sounds/Grab off Vine/832537__geoff-bremner-audio__velcro-rip-mkh416.wav" id="2_l7njv"]
+[ext_resource type="AudioStream" uid="uid://12nsu25r7ml0" path="res://Resources/Sounds/Pumpkin Grow/sharp-pop-328170.mp3" id="3_go8tx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pw5j8"]
 albedo_color = Color(0.043137256, 0.14509805, 0, 1)
@@ -59,6 +61,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7906126, 2.6809673, -0.0444
 radius = 0.019042969
 height = 0.12989807
 material = SubResource("StandardMaterial3D_go8tx")
+
+[node name="VineSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_l7njv")
+volume_db = -15.0
+
+[node name="PumpkinGrow" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_go8tx")
+volume_db = -30.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

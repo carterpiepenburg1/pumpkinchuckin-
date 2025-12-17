@@ -2,20 +2,24 @@ extends XROrigin3D
 
 #Left Hand
 @onready var leftHand = $Left
+@onready var leftHandSound = $Left/LeftGrabSound
 
 #Right Hand
 @onready var rightHand = $Right
+@onready var rightHandSound = $Right/RightGrabSound
 
 func _process(delta: float) -> void:
-	updateHand(leftHand)
-	updateHand(rightHand)
+	updateHand(leftHand, leftHandSound)
+	updateHand(rightHand, rightHandSound)
 
-func updateHand(hand):
+func updateHand(hand, handSound):
 	if hand.handGripping:
 		var areas = hand.handArea.get_overlapping_areas()
 		if areas.size() > 0 || hand.grabbedArea != null:
+			
 			if hand.grabbedArea == null:
 				hand.grabbedArea = areas[0]
+				handSound.play()
 			
 			if !hand.setOffset:
 				hand.handOffset = hand.handArea.global_transform.affine_inverse() * hand.grabbedArea.global_transform
