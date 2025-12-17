@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/wind-in-trees-117477.mp3-bdcad61315f0ea78c761
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

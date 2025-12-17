@@ -16,6 +16,9 @@ extends Node3D
 @onready var origin = sling.global_position
 @onready var originRotation = sling.rotation
 
+@onready var loadSound = $Sling/LoadSound
+@onready var shootSound = $Sling/ShootSound
+
 var loaded = false
 var loadedPumpkin = null
 
@@ -62,6 +65,8 @@ func _process(delta: float) -> void:
 			var area = loadedPumpkin.get_node("PumpkinArea")
 			
 			print("flung pumpkin")
+			
+			shootSound.play()
 			
 			loadedPumpkin.velocity = velocity
 			loadedPumpkin.startPos = startPos
@@ -116,7 +121,8 @@ func _process(delta: float) -> void:
 		var faceOrigin = newOrigin - sling.global_position
 		faceOrigin.y = 0
 		
-		sling.rotation.y = atan2(faceOrigin.x, faceOrigin.z)
+		if faceOrigin.length_squared() > 0.0001:
+			sling.rotation.y = atan2(faceOrigin.x, faceOrigin.z)
 		
 	else:
 		target.visible = false
@@ -128,7 +134,8 @@ func _process(delta: float) -> void:
 		var faceOrigin = newOrigin - sling.global_position
 		faceOrigin.y = 0
 		
-		sling.rotation.y = atan2(faceOrigin.x, faceOrigin.z)
+		if faceOrigin.length_squared() > 0.0001:
+			sling.rotation.y = atan2(faceOrigin.x, faceOrigin.z)
 
 func updateRope(rope, start, end, radius, sides):
 	var mesh = CylinderMesh.new()
@@ -155,3 +162,5 @@ func _on_sling_area_area_entered(area: Area3D) -> void:
 				
 			loaded = true
 			loadedPumpkin = pumpkin
+			
+			loadSound.play()

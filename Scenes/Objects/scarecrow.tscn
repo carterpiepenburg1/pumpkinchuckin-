@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://3bm4j61b1rvo"]
+[gd_scene load_steps=16 format=3 uid="uid://3bm4j61b1rvo"]
 
 [ext_resource type="Script" uid="uid://c52xympfjpqfp" path="res://Scripts/enemy/enemy.gd" id="1_7ifby"]
 [ext_resource type="Script" uid="uid://bh1xxfkqxn2qr" path="res://Scripts/enemy/scarecrow.gd" id="1_i2hje"]
+[ext_resource type="AudioStream" uid="uid://bc1a3vfy1ko5e" path="res://Resources/Sounds/Scarecrow Hit/editedScarecrow.wav" id="3_oh1pf"]
 
 [sub_resource type="Animation" id="Animation_oh1pf"]
 length = 0.001
@@ -129,6 +130,10 @@ script = ExtResource("1_7ifby")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/EnemyArea"]
 shape = SubResource("CylinderShape3D_gg80o")
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="Model"]
+stream = ExtResource("3_oh1pf")
+volume_db = -5.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="Model/EnemyArea" method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Model/EnemyArea" to="Model/EnemyArea" method="_on_area_entered"]

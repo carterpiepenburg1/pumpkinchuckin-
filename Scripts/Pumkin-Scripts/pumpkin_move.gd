@@ -14,6 +14,10 @@ var time = 0.0
 @onready var dotTimer = $DotTimer
 @onready var dot = load("res://Scenes/Objects/dot.tscn")
 
+@onready var pumpkingHitSound = $PumpkinGround
+
+@onready var pumpkinArea = $PumpkinArea
+
 func _physics_process(delta: float) -> void:
 	
 	if (onVine == false && inHand == false && inSling == false) || flung == true:
@@ -25,7 +29,19 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector3(0, 0, 0)
 	
 	if global_position.y < 0:
-			queue_free()
+		
+		#Hide model
+		visible = false
+		
+		#Disable area3D
+		pumpkinArea.set_deferred("monitorable", false)
+		pumpkinArea.set_deferred("monitoring", false)
+		
+		pumpkingHitSound.play()
+		
+		await pumpkingHitSound.finished
+		
+		queue_free()
 
 
 func _on_dot_timer_timeout() -> void:
