@@ -13,7 +13,7 @@ func _ready() -> void:
 		
 func _process(delta: float) -> void:
 	if newPos != null:
-		root.global_position = lerp(root.global_position, newPos, delta*20)
+		root.global_position = lerp(root.global_position, newPos, delta*5)
 		
 func advance():
 	newPos = Vector3(root.global_position.x, root.global_position.y, root.global_position.z + Globals.advanceAmount)

@@ -1083,9 +1083,9 @@ mesh = SubResource("CylinderMesh_yqnnc")
 transform = Transform3D(0.98451245, 0, 0.17531517, 0, 1, 0, -0.17531517, 0, 0.98451245, -0.8324139, 0.6181954, -4.04626)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Sign-Post"]
-transform = Transform3D(1, 0, -9.313226e-09, 0, 0.6, 0, 7.4505806e-08, 0, 0.125, -0.0011290312, -0.009173572, 0)
+transform = Transform3D(1, 0, -9.313226e-09, 0, 0.6, 0, 7.4505806e-08, 0, 0.125, -0.0011290312, -0.020814538, 0)
 material_override = SubResource("StandardMaterial3D_iswhu")
-size = Vector3(1.2368774, 1.2046509, 1)
+size = Vector3(1.2368774, 1.2922516, 1)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Sign-Post"]
 transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, -0.7298831, 0)
