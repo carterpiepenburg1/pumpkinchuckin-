@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cvvtgegk7fpc5"]
+[gd_scene load_steps=38 format=3 uid="uid://cjymbfbt1akrf"]
 
 [ext_resource type="Script" uid="uid://b0arcax67joif" path="res://Scripts/initializevr.gd" id="1_on4kn"]
 [ext_resource type="Texture2D" uid="uid://ujlhjpujhisj" path="res://Resources/Textures/sky.png" id="3_8va2t"]

@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://b6ky6cuao6ou4" path="res://Resources/Sounds/Slingshot Loaded/editedLoad.wav" id="12_0ryyh"]
 [ext_resource type="PackedScene" uid="uid://cfl8awrt1ucb1" path="res://Resources/models/tree.glb" id="12_1e40d"]
 [ext_resource type="AudioStream" uid="uid://b6hjbr7jqjyv4" path="res://Resources/Sounds/Slingshot Release/editedRelease.wav" id="13_3n3ex"]
-[ext_resource type="Script" uid="uid://c0yrk3ai6exhg" path="res://Scripts/Sign Score/GameOverScore.gd" id="17_6di5v"]
+[ext_resource type="Script" path="res://Scripts/Sign Score/GameOverScore.gd" id="17_6di5v"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ebto2"]
 panorama = ExtResource("2_3n5g3")
