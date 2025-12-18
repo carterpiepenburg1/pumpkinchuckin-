@@ -9,10 +9,10 @@ extends XROrigin3D
 @onready var rightHandSound = $Right/RightGrabSound
 
 func _process(delta: float) -> void:
-	updateHand(leftHand, leftHandSound)
-	updateHand(rightHand, rightHandSound)
+	updateHand(leftHand, leftHandSound, delta)
+	updateHand(rightHand, rightHandSound, delta)
 
-func updateHand(hand, handSound):
+func updateHand(hand, handSound, delta):
 	if hand.handGripping:
 		var areas = hand.handArea.get_overlapping_areas()
 		if areas.size() > 0 || hand.grabbedArea != null:
@@ -39,7 +39,8 @@ func updateHand(hand, handSound):
 				var slingshot = hand.grabbedArea.get_parent().get_parent()
 				var sling = hand.grabbedArea.get_parent()
 				#needs to be fixed
-				sling.global_position = hand.handArea.global_transform * hand.handOffset.origin
+				#sling.global_position = hand.handArea.global_transform * hand.handOffset.origin
+				sling.global_position = lerp(sling.global_position, hand.handArea.global_transform * hand.handOffset.origin, delta*15)
 				slingshot.beingGrabbed = true
 				
 		else:

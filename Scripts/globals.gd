@@ -2,17 +2,20 @@ extends Node
 
 #Game
 var score = 0
-var roundNum = 3
+var roundNum = 1
 var roundTime = 80
 
 #Enemy placement
-var enemyStartDistance = 20
-var rowWidth = 10
+var enemyStartDistance = 32
+var rowWidth = 15
 var enemiesPerRow = 5
-var enemyDensity = 0.5
+
+#Enemy density
+var enemyDensity = 0.2
+var enemyDensityIncrease = 0.2
 
 #Enemy advancing
 var advanceTime = 8
-var advanceAmount = 4
+var advanceAmount = 8
 
-#Advances 4 every 8 seconds for 80 seconds rounds = 10 advances of 4 = 40 total distance
+#Advances 8 every 10 seconds for 80 seconds rounds = 8 advances of 8 = 64 total distance

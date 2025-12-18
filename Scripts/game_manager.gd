@@ -21,7 +21,7 @@ func _ready() -> void:
 	roundTimer.start()
 
 func _on_advance_timer_timeout() -> void:
-	if Globals.roundNum <= 3:
+	if Globals.roundNum <= 4:
 		spawnEnemies()
 		enemy_advance.emit()
 
@@ -29,8 +29,13 @@ func spawnEnemies():
 	for i in range(0, Globals.enemiesPerRow):
 		var guaranteedEnemy = rng.randi_range(0, Globals.enemiesPerRow - 1)
 		if i == guaranteedEnemy or rng.randf() < Globals.enemyDensity:
+			
 			#spawning enemy based on round
-			var enemyType = rng.randi_range(1, Globals.roundNum)
+			var enemyType
+			if Globals.roundNum < 4:
+				enemyType = rng.randi_range(1, Globals.roundNum)
+			else:
+				enemyType = 3
 			
 			var enemyHeightOffset = 1
 			
@@ -50,6 +55,7 @@ func spawnEnemies():
 
 
 func _on_round_timer_timeout() -> void:
+	Globals.enemyDensity += Globals.enemyDensityIncrease
 	Globals.roundNum += 1
 	clear_enemies.emit()
 		
