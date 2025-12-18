@@ -25,6 +25,8 @@ var stage8 = 0 #player has finished the tutorial
 @onready var playerReference = get_parent().get_node("Player")
 @onready var playerLHAND = playerReference.get_node("Left")
 @onready var playerRHAND = playerReference.get_node("Right")
+@onready var leftVine = get_parent().get_node("Environment").get_node("Vine")
+@onready var rightVine = get_parent().get_node("Environment").get_node("Vine2")
 
 @onready var slingReference = get_parent().get_node("Slingshot")
 @onready var pumpSlingRef = null
@@ -129,6 +131,12 @@ func _process(_delta: float) -> void:
 		stage8 += 1
 		timerNextLevel.start()
 		hitScarecrowOnce = true
+		#leftVine.queue_free()
+		#rightVine.queue_free()
+		#if playerLHAND.grabbedArea != null:
+			#playerLHAND.grabbedArea.get_parent().queue_free()
+		#if playerRHAND.grabbedArea != null:
+			#playerRHAND.grabbedArea.get_parent().queue_free()
 		#get_tree().change_scene_to_file("res://Scenes/pumpkinchuckin.tscn")
 	
 	if pumpSlingRef != null:
@@ -153,13 +161,11 @@ func _process(_delta: float) -> void:
 			#checkGrabbed = true
 			#stage3 += 1
 		if playerLHAND.grabbedArea.name == "PumpkinArea":
-			print("Grabbing pumpkin")
 			if checkGrabbedPump == false:
 			#stage2 += 1
 				stage3 += 1
 				stage4 += 1
 				checkGrabbedPump = true
-				print("iterate pumpkin")
 		elif playerLHAND.grabbedArea.name == "SlingArea":
 			if checkGrabSling == false:
 				stage5 += 1
@@ -172,9 +178,7 @@ func _process(_delta: float) -> void:
 			#checkGrabbed = true
 			#stage3 += 1
 		if playerRHAND.grabbedArea.name == "PumpkinArea":
-			print("grabbing pumpkin")
 			if checkGrabbedPump == false:
-				print("Iterate pumpkin")
 				#stage2 += 1
 				stage3 += 1
 				stage4 += 1
@@ -194,4 +198,5 @@ func _process(_delta: float) -> void:
 func _on_timer_2_timeout() -> void:
 	Globals.score = 0
 	groupStaticSpawners.queue_free()
-	get_tree().change_scene_to_file("res://Scenes/pumpkinchuckin.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://Scenes/pumpkinchuckin.tscn")
+	#get_tree().change_scene_to_file("res://Scenes/pumpkinchuckin.tscn")
