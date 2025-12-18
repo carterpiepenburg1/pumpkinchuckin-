@@ -8,6 +8,12 @@ extends Node3D
 @onready var ghost = load("res://Scenes/Objects/ghost.tscn")
 @onready var crow = load("res://Scenes/Objects/crow.tscn")
 
+#Music files
+@onready var music1 = load("res://Resources/Sounds/Background Music/758021__audiocoffee__halloween-time-loop-ver.wav")
+@onready var music2 = load("res://Resources/Sounds/Background Music/753499__audiocoffee__halloween-background-short-ver.wav")
+@onready var music3 = load("res://Resources/Sounds/Background Music/752445__audiocoffee__hard-rock-halloween-loop1.wav")
+@onready var musicController = $Music
+
 signal enemy_advance()
 signal clear_enemies()
 
@@ -19,9 +25,12 @@ func _ready() -> void:
 	
 	advanceTimer.start()
 	roundTimer.start()
+	
+	musicController.stream = music1
+	musicController.play()
 
 func _on_advance_timer_timeout() -> void:
-	if Globals.roundNum <= 4:
+	if Globals.roundNum < 5:
 		spawnEnemies()
 		enemy_advance.emit()
 
@@ -57,5 +66,15 @@ func spawnEnemies():
 func _on_round_timer_timeout() -> void:
 	Globals.enemyDensity += Globals.enemyDensityIncrease
 	Globals.roundNum += 1
+	
+	if Globals.roundNum == 3:
+		musicController.stream = music2
+		musicController.play()
+	elif Globals.roundNum == 4:
+		musicController.stream = music3
+		musicController.play()
+	elif Globals.roundNum == 5:
+		musicController.stop()
+		
 	clear_enemies.emit()
 		
