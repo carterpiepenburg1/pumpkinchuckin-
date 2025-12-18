@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://mnvfd25rsdxl"
+path="res://.godot/imported/falling-bomb-41038.mp3-ce583562c32a85113429e6012f06b898.mp3str"
+
+[deps]
+
+source_file="res://Resources/Sounds/Pumpkin Flying Through Air/falling-bomb-41038.mp3"
+dest_files=["res://.godot/imported/falling-bomb-41038.mp3-ce583562c32a85113429e6012f06b898.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

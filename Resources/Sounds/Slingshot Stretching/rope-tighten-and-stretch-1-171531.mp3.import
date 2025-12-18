@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dd87su87i6oxy"
+path="res://.godot/imported/rope-tighten-and-stretch-1-171531.mp3-5730597578a2ca3d800860c6300e8429.mp3str"
+
+[deps]
+
+source_file="res://Resources/Sounds/Slingshot Stretching/rope-tighten-and-stretch-1-171531.mp3"
+dest_files=["res://.godot/imported/rope-tighten-and-stretch-1-171531.mp3-5730597578a2ca3d800860c6300e8429.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

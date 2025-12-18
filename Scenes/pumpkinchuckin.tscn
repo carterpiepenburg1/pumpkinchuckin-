@@ -1,17 +1,22 @@
-[gd_scene load_steps=27 format=3 uid="uid://cnfyj80sfpkq3"]
+[gd_scene load_steps=35 format=3 uid="uid://cnfyj80sfpkq3"]
 
 [ext_resource type="Script" uid="uid://b0arcax67joif" path="res://Scripts/initializevr.gd" id="1_ua3oe"]
 [ext_resource type="Texture2D" uid="uid://ujlhjpujhisj" path="res://Resources/Textures/sky.png" id="2_3n5g3"]
 [ext_resource type="Script" uid="uid://blp7t2rm6f3sg" path="res://Scripts/Player/player.gd" id="2_c37g7"]
 [ext_resource type="Script" uid="uid://yripqjx66c00" path="res://Scripts/game_manager.gd" id="2_yqnnc"]
 [ext_resource type="Script" uid="uid://dnxoog51swnsj" path="res://Scripts/Player/hand.gd" id="3_gfff3"]
+[ext_resource type="AudioStream" uid="uid://cvkwc6kidc7cb" path="res://Resources/Sounds/Wind Through Trees Ambience (Loopable)/wind-in-trees-117477.mp3" id="3_iswhu"]
+[ext_resource type="AudioStream" uid="uid://e65en85qwfjc" path="res://Resources/Sounds/Background Music/758021__audiocoffee__halloween-time-loop-ver.wav" id="4_cdyhi"]
 [ext_resource type="PackedScene" uid="uid://cy6tf6pp8tta6" path="res://Scenes/Objects/vine.tscn" id="5_8o4mi"]
 [ext_resource type="Script" uid="uid://cf6yojo8rcx4y" path="res://Scripts/Slingshot/slingshot.gd" id="6_8o4mi"]
 [ext_resource type="Texture2D" uid="uid://sntfeilnq72k" path="res://Resources/Textures/grass.jpg" id="6_ebto2"]
+[ext_resource type="AudioStream" uid="uid://b0v00satwso4e" path="res://Resources/Sounds/Grab/704749__err0rc0de__grab-item.wav" id="8_0u05k"]
 [ext_resource type="Script" uid="uid://ddpj0xomrl5eg" path="res://Scripts/Sign Score/sign.gd" id="9_yqnnc"]
 [ext_resource type="PackedScene" uid="uid://dtpvk2ebxbr0i" path="res://Resources/models/scarecrow.glb" id="10_iswhu"]
 [ext_resource type="PackedScene" uid="uid://mhwbp1pgrke0" path="res://Resources/models/slingshot.glb" id="11_0u05k"]
 [ext_resource type="PackedScene" uid="uid://87tgxsm8bg3l" path="res://Resources/models/crow.glb" id="12_0ryyh"]
+[ext_resource type="AudioStream" uid="uid://b6ky6cuao6ou4" path="res://Resources/Sounds/Slingshot Loaded/editedLoad.wav" id="12_0ryyh"]
+[ext_resource type="AudioStream" uid="uid://b6hjbr7jqjyv4" path="res://Resources/Sounds/Slingshot Release/editedRelease.wav" id="13_3n3ex"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ebto2"]
 panorama = ExtResource("2_3n5g3")
@@ -23,9 +28,8 @@ sky_material = SubResource("PanoramaSkyMaterial_ebto2")
 background_mode = 2
 background_color = Color(0.76037085, 0.97431797, 0.9702292, 1)
 sky = SubResource("Sky_yqnnc")
-fog_light_color = Color(0.73032373, 0.96586627, 0.9999998, 1)
-fog_sun_scatter = 0.5
-fog_density = 0.0
+fog_sun_scatter = 0.1
+fog_density = 0.025
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gfff3"]
 radius = 0.049555775
@@ -33,7 +37,25 @@ radius = 0.049555775
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqnnc"]
 albedo_color = Color(1, 0.62, 0.62, 1)
 albedo_texture = ExtResource("6_ebto2")
-uv1_scale = Vector3(2000, 2000, 2000)
+uv1_scale = Vector3(100, 100, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0u05k"]
+albedo_color = Color(7.2196127e-07, 0.4493385, 4.813075e-07, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ryyh"]
+albedo_color = Color(0, 0.4509804, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3n3ex"]
+albedo_color = Color(0, 0.4509804, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ixpx"]
+albedo_color = Color(0, 0.4509804, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6di5v"]
+albedo_color = Color(0.65891117, 1.9131974e-06, 5.2943824e-07, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b176m"]
+albedo_color = Color(0.34103164, 0.2692149, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8o4mi"]
 albedo_color = Color(0.35095242, 0.15484291, 0.07356518, 1)
@@ -72,9 +94,19 @@ wait_time = 5.0
 
 [node name="RoundTimer" type="Timer" parent="GameManager"]
 
+[node name="Ambience" type="AudioStreamPlayer" parent="GameManager"]
+stream = ExtResource("3_iswhu")
+volume_db = -15.0
+autoplay = true
+parameters/looping = true
+
+[node name="Music" type="AudioStreamPlayer" parent="GameManager"]
+stream = ExtResource("4_cdyhi")
+volume_db = -15.0
+autoplay = true
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.08686353, 0.8868179, -0.45388195, -0.15191406, 0.46206695, 0.873737, 0.9845694, -0.006944829, 0.17485687, 0, 5.125532, 0)
-shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2t1jq")
@@ -100,6 +132,10 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Left/Area"]
 shape = SubResource("SphereShape3D_gfff3")
 
+[node name="LeftGrabSound" type="AudioStreamPlayer3D" parent="Player/Left"]
+stream = ExtResource("8_0u05k")
+volume_db = -10.0
+
 [node name="Right" type="XRController3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
 tracker = &"right_hand"
@@ -113,11 +149,15 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Right/Area"]
 shape = SubResource("SphereShape3D_gfff3")
 
+[node name="RightGrabSound" type="AudioStreamPlayer3D" parent="Player/Right"]
+stream = ExtResource("8_0u05k")
+volume_db = -10.0
+
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="Floor" type="CSGBox3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-size = Vector3(4000, 1, 4000)
+size = Vector3(200, 1, 200)
 material = SubResource("StandardMaterial3D_yqnnc")
 
 [node name="Vine" parent="Environment" instance=ExtResource("5_8o4mi")]
@@ -125,6 +165,41 @@ transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 
 
 [node name="Vine3" parent="Environment" instance=ExtResource("5_8o4mi")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.7, 0, 0)
+
+[node name="Treeline" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -20)
+material_override = SubResource("StandardMaterial3D_0u05k")
+size = Vector3(80, 10, 1)
+
+[node name="LeftTreeline" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.908644, 5, 17.792053)
+material_override = SubResource("StandardMaterial3D_0ryyh")
+size = Vector3(1, 10, 99.58411)
+
+[node name="RightTreeline" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.695984, 5, 19.072021)
+material_override = SubResource("StandardMaterial3D_3n3ex")
+size = Vector3(1, 10, 85.58252)
+
+[node name="BackTreeline" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5578003, 5, 58.12391)
+size = Vector3(71.37537, 10, 1)
+material = SubResource("StandardMaterial3D_4ixpx")
+
+[node name="Barn" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -14.012964, 3.0339003, 14.976358)
+size = Vector3(16.888184, 8, 20)
+material = SubResource("StandardMaterial3D_6di5v")
+
+[node name="MainField" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 12, 0.28124, 29.484943)
+material_override = SubResource("StandardMaterial3D_b176m")
+size = Vector3(35, 1, 57.465942)
+
+[node name="SmallField" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -16.120764, 0.3201046, 40.859116)
+material_override = SubResource("StandardMaterial3D_b176m")
+size = Vector3(25, 1, 25.76477)
 
 [node name="Slingshot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.89874977)
@@ -163,6 +238,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
 [node name="rightRopeConnect" type="Node3D" parent="Slingshot/Sling"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
 
+[node name="LoadSound" type="AudioStreamPlayer3D" parent="Slingshot/Sling"]
+stream = ExtResource("12_0ryyh")
+volume_db = -10.0
+
+[node name="ShootSound" type="AudioStreamPlayer3D" parent="Slingshot/Sling"]
+stream = ExtResource("13_3n3ex")
+volume_db = -25.0
+
 [node name="Target" type="CSGTorus3D" parent="Slingshot"]
 visible = false
 material_override = SubResource("StandardMaterial3D_ebto2")
@@ -171,22 +254,22 @@ sides = 20
 ring_sides = 10
 
 [node name="ArcPrediction" type="Path3D" parent="Slingshot"]
-visible = false
 curve = SubResource("Curve3D_ebto2")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Slingshot/ArcPrediction"]
-polygon = PackedVector2Array(0, 0, 0, 0.1, 0.1, 0.1, 0.1, 0)
+polygon = PackedVector2Array(-0.05, -0.05, -0.05, 0.05, 0.05, 0.05, 0.05, -0.05)
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
 path_interval = 1.0
 path_simplify_angle = 0.0
 path_rotation = 2
-path_rotation_accurate = false
-path_local = false
+path_rotation_accurate = true
+path_local = true
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
+smooth_faces = true
 material = SubResource("StandardMaterial3D_ebto2")
 
 [node name="LeftRope" type="MeshInstance3D" parent="Slingshot"]

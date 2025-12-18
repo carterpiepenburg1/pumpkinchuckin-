@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://ck8m5kle2hrx5"]
+[gd_scene load_steps=9 format=3 uid="uid://ck8m5kle2hrx5"]
 
 [ext_resource type="Script" path="res://Scripts/enemy/crow.gd" id="1_ta26y"]
 [ext_resource type="Script" uid="uid://c52xympfjpqfp" path="res://Scripts/enemy/enemy.gd" id="2_gclu3"]
+[ext_resource type="AudioStream" uid="uid://bxemsstsibct7" path="res://Resources/Sounds/Crow Hit/editedCrow.wav" id="3_gclu3"]
 
 [sub_resource type="Animation" id="Animation_i2hje"]
 length = 0.001
@@ -12,18 +13,6 @@ tracks/0/path = NodePath("Model")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_7ifby"]
-resource_name = "Scarecrow"
-length = 4.0
-loop_mode = 1
-tracks/0/type = "rotation_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Model")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 2, 1, 0.17364818, 0, 0, 0.9848077)
 
 [sub_resource type="Animation" id="Animation_ta26y"]
 resource_name = "crow"
@@ -36,31 +25,17 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 0.53333336, 1, 0, 0.1, 0)
 
-[sub_resource type="Animation" id="Animation_fgfit"]
-resource_name = "ghost"
-length = 8.0
-loop_mode = 1
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Model")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(-0.3, 1, 0, 0, 0, 0, 1, 0, 0, 0, 4, 1, 0, 3.0942752, 0)
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ink2j"]
 _data = {
 &"RESET": SubResource("Animation_i2hje"),
-&"Scarecrow": SubResource("Animation_7ifby"),
-&"crow": SubResource("Animation_ta26y"),
-&"ghost": SubResource("Animation_fgfit")
+&"crow": SubResource("Animation_ta26y")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ta26y"]
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fgfit"]
-size = Vector3(0.1, 0.2, 0.4)
+size = Vector3(0.7, 0.4, 0.5)
 
 [node name="Crow" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -76,9 +51,9 @@ autoplay = "crow"
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 
 [node name="Body" type="CSGBox3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9999889, 0, 0, 0, 0.9999889, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_ta26y")
-size = Vector3(0.25, 0.25, 0.5)
+size = Vector3(0.7, 0.4, 0.5)
 
 [node name="EnemyArea" type="Area3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999996, 0, 0, 0)
@@ -86,5 +61,9 @@ script = ExtResource("2_gclu3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/EnemyArea"]
 shape = SubResource("BoxShape3D_fgfit")
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="Model"]
+stream = ExtResource("3_gclu3")
+volume_db = -5.0
 
 [connection signal="area_entered" from="Model/EnemyArea" to="Model/EnemyArea" method="_on_area_entered"]

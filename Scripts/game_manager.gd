@@ -32,6 +32,8 @@ func spawnEnemies():
 			#spawning enemy based on round
 			var enemyType = rng.randi_range(1, Globals.roundNum)
 			
+			var enemyHeightOffset = 1
+			
 			var newEnemy
 			if enemyType == 1:
 				newEnemy = scarecrow.instantiate()
@@ -39,9 +41,10 @@ func spawnEnemies():
 				newEnemy = ghost.instantiate()
 			else:
 				newEnemy = crow.instantiate()
+				enemyHeightOffset = rng.randf_range(1, 3)
 
 			get_tree().current_scene.add_child(newEnemy)
-			newEnemy.global_position = Vector3(((i / float(Globals.enemiesPerRow - 1)) - 0.5) * Globals.rowWidth, 1, -Globals.enemyStartDistance)
+			newEnemy.global_position = Vector3(((i / float(Globals.enemiesPerRow - 1)) - 0.5) * Globals.rowWidth, enemyHeightOffset, -Globals.enemyStartDistance)
 			newEnemy.rotation.y = deg_to_rad(270)
 
 

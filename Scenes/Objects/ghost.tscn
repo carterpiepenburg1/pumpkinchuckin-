@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/enemy/ghost.gd" id="1_fgfit"]
 [ext_resource type="Script" uid="uid://c52xympfjpqfp" path="res://Scripts/enemy/enemy.gd" id="2_iyro3"]
+[ext_resource type="AudioStream" uid="uid://d0eworwjixr06" path="res://Resources/Sounds/Ghost Hit/editedGhost.wav" id="3_iyro3"]
 
 [sub_resource type="Animation" id="Animation_i2hje"]
 length = 0.001
@@ -24,18 +25,6 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0)
 }
 
-[sub_resource type="Animation" id="Animation_7ifby"]
-resource_name = "Scarecrow"
-length = 4.0
-loop_mode = 1
-tracks/0/type = "rotation_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Model")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 2, 1, 0.17364818, 0, 0, 0.9848077)
-
 [sub_resource type="Animation" id="Animation_fgfit"]
 resource_name = "ghost"
 length = 16.0
@@ -55,7 +44,6 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ink2j"]
 _data = {
 &"RESET": SubResource("Animation_i2hje"),
-&"Scarecrow": SubResource("Animation_7ifby"),
 &"ghost": SubResource("Animation_fgfit")
 }
 
@@ -103,5 +91,9 @@ script = ExtResource("2_iyro3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/EnemyArea"]
 shape = SubResource("BoxShape3D_fgfit")
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="Model"]
+stream = ExtResource("3_iyro3")
+volume_db = -5.0
 
 [connection signal="area_entered" from="Model/EnemyArea" to="Model/EnemyArea" method="_on_area_entered"]
