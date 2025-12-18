@@ -1,0 +1,96 @@
+[gd_scene load_steps=11 format=3 uid="uid://dxu7ookqgh17x"]
+
+[ext_resource type="Script" uid="uid://1xr5mmy1ybs" path="res://Scripts/Tutorial/tutorialEnemyLogic.gd" id="1_jgmjt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7dbn"]
+albedo_color = Color(0.90588236, 0.32941177, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgmjt"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wc2dv"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_grodu"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_teu1p"]
+albedo_color = Color(0.8509804, 0.45490196, 0.043137256, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30r71"]
+albedo_color = Color(0.63619787, 0.22631136, 9.62615e-08, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_owbeb"]
+albedo_color = Color(0.12564027, 0.43340433, 0.81826115, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_47afi"]
+albedo_color = Color(0.1254902, 0.43529412, 0.81960785, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xspbp"]
+
+[node name="EnemyTutorial" type="Node3D"]
+
+[node name="Model2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="Head" type="CSGSphere3D" parent="Model2"]
+transform = Transform3D(1, 0, 0, 0, 0.99147815, 0.13027126, 0, -0.13027126, 0.99147815, 0, 0.7131681, -0.093703836)
+material_override = SubResource("StandardMaterial3D_d7dbn")
+radius = 0.3
+
+[node name="Right Eye" type="CSGTorus3D" parent="Model2"]
+transform = Transform3D(0.08418603, 0.96225005, 0.258819, -0.99064386, 0.052824687, 0.12583236, 0.10741019, -0.26699078, 0.95769423, 0.248, 0.773215, -0.20245293)
+material_override = SubResource("StandardMaterial3D_jgmjt")
+inner_radius = 0.03
+outer_radius = 0.06
+
+[node name="Left Eye" type="CSGTorus3D" parent="Model2"]
+transform = Transform3D(0.08418603, 0.9622501, -0.258819, -0.9847666, 0.120001435, 0.12583236, 0.15214089, 0.244283, 0.9576943, 0.248, 0.79926926, -0.0041572973)
+material_override = SubResource("StandardMaterial3D_wc2dv")
+inner_radius = 0.03
+outer_radius = 0.06
+
+[node name="Nose" type="CSGCylinder3D" parent="Model2"]
+transform = Transform3D(0.8660254, -0.5, 0, 0.49573907, 0.85864526, 0.13027126, -0.06513563, -0.11281822, 0.99147815, 0.278, 0.71386427, -0.093795314)
+material_override = SubResource("StandardMaterial3D_grodu")
+radius = 0.03
+height = 0.1
+
+[node name="Right Arm" type="CSGCylinder3D" parent="Model2"]
+transform = Transform3D(1, 0, 0, 0, -0.30046052, 0.9537938, 0, -0.9537938, -0.30046052, 0, 0.20553137, -0.3547982)
+material_override = SubResource("StandardMaterial3D_teu1p")
+radius = 0.15
+height = 0.4
+
+[node name="Left Arm" type="CSGCylinder3D" parent="Model2"]
+transform = Transform3D(1, 0, 0, 0, -0.043876246, -0.9990366, 0, 0.9990366, -0.043876246, 0, 0.29020768, 0.28966254)
+material_override = SubResource("StandardMaterial3D_teu1p")
+radius = 0.15
+height = 0.4
+
+[node name="Body" type="CSGCylinder3D" parent="Model2"]
+transform = Transform3D(1, 0, 0, 0, 0.99147815, 0.13027126, 0, -0.13027126, 0.99147815, 0, 0.065700606, -0.008632466)
+material_override = SubResource("StandardMaterial3D_30r71")
+radius = 0.2
+height = 0.8
+
+[node name="Right Leg" type="CSGCylinder3D" parent="Model2"]
+transform = Transform3D(1, 0, 0, 0, 0.99995935, -0.008983627, 0, 0.008983627, 0.99995935, 0, -0.6491293, -0.06599948)
+material_override = SubResource("StandardMaterial3D_owbeb")
+radius = 0.15
+height = 0.7
+
+[node name="Left Leg" type="CSGCylinder3D" parent="Model2"]
+transform = Transform3D(1, 0, 0, 0, 0.96369886, 0.26699054, 0, -0.26699054, 0.96369886, 0, -0.61004794, 0.23144397)
+material_override = SubResource("StandardMaterial3D_47afi")
+radius = 0.15
+height = 0.7
+
+[node name="EnemyArea" type="Area3D" parent="Model2"]
+transform = Transform3D(1, 0, 0, 0, 0.99147797, 0.13027123, 0, -0.13027123, 0.99147797, 0, 0, 0)
+script = ExtResource("1_jgmjt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model2/EnemyArea"]
+shape = SubResource("CylinderShape3D_xspbp")
+
+[connection signal="area_entered" from="Model2/EnemyArea" to="Model2/EnemyArea" method="_on_area_entered"]

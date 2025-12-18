@@ -1,0 +1,347 @@
+[gd_scene load_steps=29 format=3 uid="uid://cvvtgegk7fpc5"]
+
+[ext_resource type="Script" uid="uid://b0arcax67joif" path="res://Scripts/initializevr.gd" id="1_on4kn"]
+[ext_resource type="Texture2D" uid="uid://ujlhjpujhisj" path="res://Resources/Textures/sky.png" id="3_8va2t"]
+[ext_resource type="Script" uid="uid://blp7t2rm6f3sg" path="res://Scripts/Player/player.gd" id="4_8mnmb"]
+[ext_resource type="Script" uid="uid://dnxoog51swnsj" path="res://Scripts/Player/hand.gd" id="5_koko0"]
+[ext_resource type="Texture2D" uid="uid://sntfeilnq72k" path="res://Resources/Textures/grass.jpg" id="6_lsb8r"]
+[ext_resource type="PackedScene" uid="uid://cy6tf6pp8tta6" path="res://Scenes/Objects/vine.tscn" id="7_ap3ea"]
+[ext_resource type="Script" uid="uid://dl3uig7untol0" path="res://Scripts/Tutorial/tutorialSign.gd" id="8_70gml"]
+[ext_resource type="Script" uid="uid://cf6yojo8rcx4y" path="res://Scripts/Slingshot/slingshot.gd" id="8_t6ver"]
+[ext_resource type="Script" uid="uid://cj6p2gxhdw5ah" path="res://Scripts/Tutorial/tutorial_logic.gd" id="9_70gml"]
+[ext_resource type="Script" uid="uid://dsl5wnbkfso3v" path="res://Scripts/Tutorial/tutorialCountDown.gd" id="10_8va2t"]
+[ext_resource type="Script" uid="uid://dohdgdal0oygl" path="res://Scripts/Tutorial/tutorialEnemySpawn.gd" id="10_70gml"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ebto2"]
+panorama = ExtResource("3_8va2t")
+
+[sub_resource type="Sky" id="Sky_yqnnc"]
+sky_material = SubResource("PanoramaSkyMaterial_ebto2")
+
+[sub_resource type="Environment" id="Environment_2t1jq"]
+background_mode = 2
+background_color = Color(0.76037085, 0.97431797, 0.9702292, 1)
+sky = SubResource("Sky_yqnnc")
+fog_light_color = Color(0.73032373, 0.96586627, 0.9999998, 1)
+fog_sun_scatter = 0.5
+fog_density = 0.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gfff3"]
+radius = 0.049555775
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqnnc"]
+albedo_color = Color(1, 0.62, 0.62, 1)
+albedo_texture = ExtResource("6_lsb8r")
+uv1_scale = Vector3(2000, 2000, 2000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8o4mi"]
+albedo_color = Color(0.35095242, 0.15484291, 0.07356518, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3n5g3"]
+albedo_color = Color(0.5019608, 0.25882354, 0, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8o4mi"]
+height = 0.5
+radius = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebto2"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.4627451)
+
+[sub_resource type="Curve3D" id="Curve3D_ebto2"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ebto2"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yqnnc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iswhu"]
+albedo_color = Color(0.700176, 0.38988283, 0.015236197, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdyhi"]
+albedo_color = Color(0.5190005, 0.28110364, 0.008074824, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_on4kn"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70gml"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8va2t"]
+albedo_color = Color(0, 1, 1, 1)
+
+[node name="StartWorld" type="Node3D"]
+script = ExtResource("1_on4kn")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.08686353, 0.8868179, -0.45388195, -0.15191406, 0.46206695, 0.873737, 0.9845694, -0.006944829, 0.17485687, 0, 5.125532, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2t1jq")
+
+[node name="Player" type="XROrigin3D" parent="."]
+transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, 0, 0.123353, 0)
+script = ExtResource("4_8mnmb")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="Player"]
+transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 0, 1.3581047, 0)
+far = 400.0
+
+[node name="Left" type="XRController3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+script = ExtResource("5_koko0")
+
+[node name="LeftModel" type="CSGSphere3D" parent="Player/Left"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Area" type="Area3D" parent="Player/Left"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Left/Area"]
+shape = SubResource("SphereShape3D_gfff3")
+
+[node name="Right" type="XRController3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+script = ExtResource("5_koko0")
+
+[node name="RightModel" type="CSGSphere3D" parent="Player/Right"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Area" type="Area3D" parent="Player/Right"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Right/Area"]
+shape = SubResource("SphereShape3D_gfff3")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(4000, 1, 4000)
+material = SubResource("StandardMaterial3D_yqnnc")
+
+[node name="Vine" parent="Environment" instance=ExtResource("7_ap3ea")]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 1.7, 0, 0)
+
+[node name="Vine2" parent="Environment" instance=ExtResource("7_ap3ea")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.7, 0, 0)
+
+[node name="Slingshot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.7283299)
+script = ExtResource("8_t6ver")
+
+[node name="RightLog" type="CSGCylinder3D" parent="Slingshot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.75, 0)
+material_override = SubResource("StandardMaterial3D_8o4mi")
+radius = 0.1
+height = 1.5
+
+[node name="LeftLog" type="CSGCylinder3D" parent="Slingshot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.75, 0)
+material_override = SubResource("StandardMaterial3D_8o4mi")
+radius = 0.1
+height = 1.5
+
+[node name="Sling" type="CSGTorus3D" parent="Slingshot"]
+transform = Transform3D(1, 0, 0, 0, -0.64278764, -0.76604444, 0, 0.76604444, -0.64278764, 0, 1.2, 0)
+material_override = SubResource("StandardMaterial3D_3n5g3")
+inner_radius = 0.22
+outer_radius = 0.3
+sides = 20
+ring_sides = 10
+
+[node name="SlingArea" type="Area3D" parent="Slingshot/Sling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12365246, 0.01870814)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Slingshot/Sling/SlingArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08105409, -0.011571914)
+shape = SubResource("CylinderShape3D_8o4mi")
+
+[node name="leftRopeConnect" type="Node3D" parent="Slingshot/Sling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
+
+[node name="rightRopeConnect" type="Node3D" parent="Slingshot/Sling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
+
+[node name="Target" type="CSGTorus3D" parent="Slingshot"]
+visible = false
+material_override = SubResource("StandardMaterial3D_ebto2")
+inner_radius = 0.8
+sides = 20
+ring_sides = 10
+
+[node name="ArcPrediction" type="Path3D" parent="Slingshot"]
+visible = false
+curve = SubResource("Curve3D_ebto2")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Slingshot/ArcPrediction"]
+polygon = PackedVector2Array(0, 0, 0, 0.1, 0.1, 0.1, 0.1, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_ebto2")
+
+[node name="LeftRope" type="MeshInstance3D" parent="Slingshot"]
+visible = false
+material_override = SubResource("StandardMaterial3D_3n5g3")
+mesh = SubResource("CylinderMesh_ebto2")
+
+[node name="RightRope" type="MeshInstance3D" parent="Slingshot"]
+visible = false
+material_override = SubResource("StandardMaterial3D_3n5g3")
+mesh = SubResource("CylinderMesh_yqnnc")
+
+[node name="Sign-Post" type="Node3D" parent="."]
+transform = Transform3D(0.98451245, 0, 0.17531517, 0, 1, 0, -0.17531517, 0, 0.98451245, -0.8324139, 0.63816595, -4.04626)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Sign-Post"]
+transform = Transform3D(1, 0, -9.313226e-09, 0, 0.6, 0, 7.4505806e-08, 0, 0.125, 0, -0.019628882, 0)
+material_override = SubResource("StandardMaterial3D_iswhu")
+size = Vector3(1, 1.0654297, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Sign-Post"]
+transform = Transform3D(0.1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, -0.7298831, 0)
+material_override = SubResource("StandardMaterial3D_cdyhi")
+
+[node name="Label3D" type="Label3D" parent="Sign-Post"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.11510253)
+script = ExtResource("8_70gml")
+
+[node name="TutorialManager" type="Node3D" parent="."]
+script = ExtResource("9_70gml")
+
+[node name="Label3D" type="Label3D" parent="TutorialManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2227464, -2.8479857)
+visible = false
+text = "Welcome to Pumpkin Chuckin!"
+
+[node name="Timer" type="Timer" parent="TutorialManager"]
+wait_time = 5.0
+
+[node name="Timer2" type="Timer" parent="TutorialManager"]
+wait_time = 5.0
+
+[node name="Progression_Text" type="Node3D" parent="."]
+
+[node name="Text_Step_2" type="Label3D" parent="Progression_Text"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.383, -12)
+text = "Use the grip buttons on the 
+back of the controllers to grab"
+font_size = 150
+
+[node name="Text_Step_first3" type="Label3D" parent="Progression_Text"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.631, -12)
+text = "Grab a pumpkin to your Left or Right
+"
+font_size = 150
+
+[node name="Text_Step_3" type="Label3D" parent="Progression_Text"]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, -1.3694383, 2.0618205, 0)
+uppercase = true
+
+[node name="Node3D" type="Node3D" parent="Progression_Text/Text_Step_3"]
+
+[node name="icon_Arrow" type="Node3D" parent="Progression_Text/Text_Step_3/Node3D"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Progression_Text/Text_Step_3/Node3D/icon_Arrow"]
+transform = Transform3D(0.18, 0, 0, 0, 0.65, 0, 0, 0, 0.18, 0, 0.9093909, 0)
+material_override = SubResource("StandardMaterial3D_on4kn")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Progression_Text/Text_Step_3/Node3D/icon_Arrow"]
+transform = Transform3D(0.102559336, -0.27227813, 1.6365838e-09, 0.095297344, 0.29302666, -4.1655803e-09, 1.6365842e-09, 1.1901657e-08, 0.14, -0.2687304, 0.6042671, 0)
+material_override = SubResource("StandardMaterial3D_70gml")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Progression_Text/Text_Step_3/Node3D/icon_Arrow"]
+transform = Transform3D(0.102556005, 0.27228835, 0, -0.09530092, 0.29301715, 0, 0, 0, 0.14, 0.27485257, 0.60399985, 0)
+material_override = SubResource("StandardMaterial3D_8va2t")
+
+[node name="Text_Step_other3" type="Label3D" parent="Progression_Text"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.369, 2.062, 0)
+
+[node name="icon_Arrow" type="Node3D" parent="Progression_Text/Text_Step_other3"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Progression_Text/Text_Step_other3/icon_Arrow"]
+transform = Transform3D(0.18, 0, 0, 0, 0.65, 0, 0, 0, 0.18, 0, 0.9093909, 0)
+material_override = SubResource("StandardMaterial3D_on4kn")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Progression_Text/Text_Step_other3/icon_Arrow"]
+transform = Transform3D(0.102559336, -0.27227813, 1.6365838e-09, 0.095297344, 0.29302666, -4.1655803e-09, 1.6365842e-09, 1.1901657e-08, 0.14, -0.2687304, 0.6042671, 0)
+material_override = SubResource("StandardMaterial3D_70gml")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Progression_Text/Text_Step_other3/icon_Arrow"]
+transform = Transform3D(0.102556005, 0.27228835, 0, -0.09530092, 0.29301715, 0, 0, 0, 0.14, 0.27485257, 0.60399985, 0)
+material_override = SubResource("StandardMaterial3D_8va2t")
+
+[node name="Text_Step_4" type="Label3D" parent="Progression_Text"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.383, -12)
+visible = false
+text = "Drop the Pumpkin
+On the Slingshot"
+font_size = 150
+
+[node name="Text_Step_5" type="Label3D" parent="Progression_Text"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.383, -12)
+visible = false
+text = "Grab and Hold the Slingshot
+"
+font_size = 150
+
+[node name="Text_Step_6" type="Label3D" parent="Progression_Text"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.383, -12)
+visible = false
+text = "Pull Back the Slingshot 
+and Release to 
+Launch the Pumpkin!
+"
+font_size = 150
+
+[node name="Text_Step_7" type="Label3D" parent="Progression_Text"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.383, -12)
+visible = false
+text = "Now Hit a Scarecrow!
+(each are worth 50 points)"
+font_size = 150
+
+[node name="Text_Step_End" type="Label3D" parent="Progression_Text"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.383, -12)
+visible = false
+text = "Tutorial Complete! 
+Starting 1st level now!"
+font_size = 150
+uppercase = true
+
+[node name="Text_Step_End_Time" type="Label3D" parent="Progression_Text"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.065044, -12)
+visible = false
+font_size = 150
+script = ExtResource("10_8va2t")
+
+[node name="StaticSpawners" type="Node3D" parent="."]
+
+[node name="SpawnLoc11" type="Node3D" parent="StaticSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.572, 1.156, -6.285)
+script = ExtResource("10_70gml")
+
+[node name="SpawnLoc22" type="Node3D" parent="StaticSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.784, 1.156, -11.447)
+script = ExtResource("10_70gml")
+
+[node name="SpawnLoc33" type="Node3D" parent="StaticSpawners"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.361, 1.156, -15.192)
+script = ExtResource("10_70gml")
+
+[connection signal="button_pressed" from="Player/Left" to="Player" method="_on_left_button_pressed"]
+[connection signal="button_released" from="Player/Left" to="Player" method="_on_left_button_released"]
+[connection signal="button_pressed" from="Player/Right" to="Player" method="_on_right_button_pressed"]
+[connection signal="button_released" from="Player/Right" to="Player" method="_on_right_button_released"]
+[connection signal="area_entered" from="Slingshot/Sling/SlingArea" to="Slingshot" method="_on_sling_area_area_entered"]
+[connection signal="timeout" from="TutorialManager/Timer" to="TutorialManager" method="_on_timer_timeout"]
+[connection signal="timeout" from="TutorialManager/Timer2" to="TutorialManager" method="_on_timer_2_timeout"]
