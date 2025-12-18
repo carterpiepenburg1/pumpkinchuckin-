@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cy6tf6pp8tta6"]
+[gd_scene load_steps=8 format=3 uid="uid://cy6tf6pp8tta6"]
 
 [ext_resource type="Script" uid="uid://c66ebpbgc56iy" path="res://Scripts/Pumkin-Scripts/vineSpawn.gd" id="1_73ut5"]
 [ext_resource type="AudioStream" uid="uid://cglu4r5nh2ep" path="res://Resources/Sounds/Grab off Vine/832537__geoff-bremner-audio__velcro-rip-mkh416.wav" id="2_l7njv"]
@@ -15,9 +15,6 @@ albedo_color = Color(0, 0.22352941, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7njv"]
 albedo_color = Color(0, 0.23921569, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_go8tx"]
-albedo_color = Color(0, 0.25490198, 0, 1)
 
 [node name="Vine" type="Node3D"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -51,16 +48,13 @@ height = 1.0129395
 material = SubResource("StandardMaterial3D_gqlm5")
 
 [node name="CSGCylinder3D5" type="CSGCylinder3D" parent="VineModel"]
-transform = Transform3D(0.9547297, -0.29747483, 0, 0.29747483, 0.9547297, 0, 0, 0, 1, 1.6822165, 3.0342283, -0.04138051)
+transform = Transform3D(0.9547297, -0.29747483, 0, 0.29747483, 0.9547297, 0, 0, 0, 1, 1.7580417, 3.0342283, -0.04138051)
 radius = 0.10205078
 height = 0.7028198
 material = SubResource("StandardMaterial3D_l7njv")
 
-[node name="EndVine" type="CSGCylinder3D" parent="VineModel"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7906126, 2.6809673, -0.044474974)
-radius = 0.019042969
-height = 0.12989807
-material = SubResource("StandardMaterial3D_go8tx")
+[node name="EndVine" type="Node3D" parent="VineModel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8896054, 2.2601876, -0.044474974)
 
 [node name="VineSound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_l7njv")
