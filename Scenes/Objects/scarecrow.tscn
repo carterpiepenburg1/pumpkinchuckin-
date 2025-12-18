@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://3bm4j61b1rvo"]
+[gd_scene load_steps=17 format=3 uid="uid://3bm4j61b1rvo"]
 
 [ext_resource type="Script" uid="uid://c52xympfjpqfp" path="res://Scripts/enemy/enemy.gd" id="1_7ifby"]
 [ext_resource type="Script" uid="uid://bh1xxfkqxn2qr" path="res://Scripts/enemy/scarecrow.gd" id="1_i2hje"]
+[ext_resource type="PackedScene" uid="uid://dtpvk2ebxbr0i" path="res://Resources/models/scarecrow.glb" id="2_fqwvy"]
 [ext_resource type="AudioStream" uid="uid://bc1a3vfy1ko5e" path="res://Resources/Sounds/Scarecrow Hit/editedScarecrow.wav" id="3_oh1pf"]
 
 [sub_resource type="Animation" id="Animation_oh1pf"]
@@ -24,7 +25,7 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("Model")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, -0.035, 0, 0, 0.999, 2, 1, 0.13052617, 0, 0, 0.9914448, 4, 1, -0.035, 0, 0, 0.999)
+tracks/0/keys = PackedFloat32Array(0, 1, -0.087, 0, 0, 0.996, 2, 1, 0.087, 0, 0, 0.996, 4, 1, -0.087, 0, 0, 0.996)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ink2j"]
 _data = {
@@ -57,6 +58,7 @@ albedo_color = Color(0.12564027, 0.43340433, 0.81826115, 1)
 albedo_color = Color(0.1254902, 0.43529412, 0.81960785, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gg80o"]
+height = 2.3867188
 
 [node name="Scarecrow" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -73,62 +75,75 @@ transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Head" type="CSGSphere3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.99147815, 0.13027126, 0, -0.13027126, 0.99147815, 0, 0.7131681, -0.093703836)
+visible = false
 material_override = SubResource("StandardMaterial3D_i2hje")
 radius = 0.3
 
 [node name="Right Eye" type="CSGTorus3D" parent="Model"]
 transform = Transform3D(0.08418603, 0.96225005, 0.258819, -0.99064386, 0.052824687, 0.12583236, 0.10741019, -0.26699078, 0.95769423, 0.248, 0.773215, -0.20245293)
+visible = false
 material_override = SubResource("StandardMaterial3D_vm7cc")
 inner_radius = 0.03
 outer_radius = 0.06
 
 [node name="Left Eye" type="CSGTorus3D" parent="Model"]
 transform = Transform3D(0.08418603, 0.9622501, -0.258819, -0.9847666, 0.120001435, 0.12583236, 0.15214089, 0.244283, 0.9576943, 0.248, 0.79926926, -0.0041572973)
+visible = false
 material_override = SubResource("StandardMaterial3D_osb2a")
 inner_radius = 0.03
 outer_radius = 0.06
 
 [node name="Nose" type="CSGCylinder3D" parent="Model"]
 transform = Transform3D(0.8660254, -0.5, 0, 0.49573907, 0.85864526, 0.13027126, -0.06513563, -0.11281822, 0.99147815, 0.278, 0.71386427, -0.093795314)
+visible = false
 material_override = SubResource("StandardMaterial3D_v3p23")
 radius = 0.03
 height = 0.1
 
 [node name="Right Arm" type="CSGCylinder3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, -0.30046052, 0.9537938, 0, -0.9537938, -0.30046052, 0, 0.20553137, -0.3547982)
+visible = false
 material_override = SubResource("StandardMaterial3D_7ifby")
 radius = 0.15
 height = 0.4
 
 [node name="Left Arm" type="CSGCylinder3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, -0.043876246, -0.9990366, 0, 0.9990366, -0.043876246, 0, 0.29020768, 0.28966254)
+visible = false
 material_override = SubResource("StandardMaterial3D_7ifby")
 radius = 0.15
 height = 0.4
 
 [node name="Body" type="CSGCylinder3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.99147815, 0.13027126, 0, -0.13027126, 0.99147815, 0, 0.065700606, -0.008632466)
+visible = false
 material_override = SubResource("StandardMaterial3D_gg80o")
 radius = 0.2
 height = 0.8
 
 [node name="Right Leg" type="CSGCylinder3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.99995935, -0.008983627, 0, 0.008983627, 0.99995935, 0, -0.6491293, -0.06599948)
+visible = false
 material_override = SubResource("StandardMaterial3D_8ypxt")
 radius = 0.15
 height = 0.7
 
 [node name="Left Leg" type="CSGCylinder3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.96369886, 0.26699054, 0, -0.26699054, 0.96369886, 0, -0.61004794, 0.23144397)
+visible = false
 material_override = SubResource("StandardMaterial3D_ink2j")
 radius = 0.15
 height = 0.7
 
+[node name="scarecrow" parent="Model" instance=ExtResource("2_fqwvy")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.91840684, 0)
+
 [node name="EnemyArea" type="Area3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 0.991478, 0.13027124, 0, -0.13027124, 0.991478, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999996, 0, 0.91840684, 0)
 script = ExtResource("1_7ifby")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/EnemyArea"]
+transform = Transform3D(1, 0, 0, 0, 0.99999565, 0, 0, 0, 0.99999565, 0, 0.19335935, 0)
 shape = SubResource("CylinderShape3D_gg80o")
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="Model"]

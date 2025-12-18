@@ -37,11 +37,12 @@ func spawnEnemies():
 			var newEnemy
 			if enemyType == 1:
 				newEnemy = scarecrow.instantiate()
+				enemyHeightOffset = 0
 			elif enemyType == 2:
 				newEnemy = ghost.instantiate()
 			else:
 				newEnemy = crow.instantiate()
-				enemyHeightOffset = rng.randf_range(1, 3)
+				enemyHeightOffset = rng.randf_range(2, 4)
 
 			get_tree().current_scene.add_child(newEnemy)
 			newEnemy.global_position = Vector3(((i / float(Globals.enemiesPerRow - 1)) - 0.5) * Globals.rowWidth, enemyHeightOffset, -Globals.enemyStartDistance)

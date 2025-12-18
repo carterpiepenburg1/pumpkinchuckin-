@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://ck8m5kle2hrx5"]
+[gd_scene load_steps=10 format=3 uid="uid://ck8m5kle2hrx5"]
 
 [ext_resource type="Script" path="res://Scripts/enemy/crow.gd" id="1_ta26y"]
 [ext_resource type="Script" uid="uid://c52xympfjpqfp" path="res://Scripts/enemy/enemy.gd" id="2_gclu3"]
 [ext_resource type="AudioStream" uid="uid://bxemsstsibct7" path="res://Resources/Sounds/Crow Hit/editedCrow.wav" id="3_gclu3"]
+[ext_resource type="PackedScene" uid="uid://87tgxsm8bg3l" path="res://Resources/models/crow.glb" id="4_oel4x"]
 
 [sub_resource type="Animation" id="Animation_i2hje"]
 length = 0.001
@@ -35,7 +36,7 @@ _data = {
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fgfit"]
-size = Vector3(0.7, 0.4, 0.5)
+size = Vector3(1.1418579, 0.56722414, 0.77337646)
 
 [node name="Crow" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -50,8 +51,12 @@ autoplay = "crow"
 [node name="Model" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 
+[node name="crow" parent="Model" instance=ExtResource("4_oel4x")]
+transform = Transform3D(0.4, 0, 0, 0, 0.39999998, 0, 0, 0, 0.39999998, 0, 0, 0)
+
 [node name="Body" type="CSGBox3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 0.9999889, 0, 0, 0, 0.9999889, 0, 0, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_ta26y")
 size = Vector3(0.7, 0.4, 0.5)
 
@@ -60,6 +65,7 @@ transform = Transform3D(1, 0, 0, 0, 0.9999996, 0, 0, 0, 0.9999996, 0, 0, 0)
 script = ExtResource("2_gclu3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Model/EnemyArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05224003, 0.012164287, -0.024505619)
 shape = SubResource("BoxShape3D_fgfit")
 
 [node name="Sound" type="AudioStreamPlayer3D" parent="Model"]

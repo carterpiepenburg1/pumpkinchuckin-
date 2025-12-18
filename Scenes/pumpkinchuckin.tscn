@@ -12,9 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://sntfeilnq72k" path="res://Resources/Textures/grass.jpg" id="6_ebto2"]
 [ext_resource type="AudioStream" uid="uid://b0v00satwso4e" path="res://Resources/Sounds/Grab/704749__err0rc0de__grab-item.wav" id="8_0u05k"]
 [ext_resource type="Script" uid="uid://ddpj0xomrl5eg" path="res://Scripts/Sign Score/sign.gd" id="9_yqnnc"]
-[ext_resource type="PackedScene" uid="uid://dtpvk2ebxbr0i" path="res://Resources/models/scarecrow.glb" id="10_iswhu"]
-[ext_resource type="PackedScene" uid="uid://mhwbp1pgrke0" path="res://Resources/models/slingshot.glb" id="11_0u05k"]
-[ext_resource type="PackedScene" uid="uid://87tgxsm8bg3l" path="res://Resources/models/crow.glb" id="12_0ryyh"]
 [ext_resource type="AudioStream" uid="uid://b6ky6cuao6ou4" path="res://Resources/Sounds/Slingshot Loaded/editedLoad.wav" id="12_0ryyh"]
 [ext_resource type="AudioStream" uid="uid://b6hjbr7jqjyv4" path="res://Resources/Sounds/Slingshot Release/editedRelease.wav" id="13_3n3ex"]
 
@@ -301,15 +298,6 @@ Score:
 0
 "
 script = ExtResource("9_yqnnc")
-
-[node name="scarecrow" parent="." instance=ExtResource("10_iswhu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16074143, 2.833776, -10.187281)
-
-[node name="slingshot" parent="." instance=ExtResource("11_0u05k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2358522, 0, -7.314122)
-
-[node name="crow" parent="." instance=ExtResource("12_0ryyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0697036, 1.0135708, -6.2147727)
 
 [connection signal="timeout" from="GameManager/AdvanceTimer" to="GameManager" method="_on_advance_timer_timeout"]
 [connection signal="timeout" from="GameManager/RoundTimer" to="GameManager" method="_on_round_timer_timeout"]

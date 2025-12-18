@@ -2,7 +2,7 @@ extends Node
 
 #Game
 var score = 0
-var roundNum = 1
+var roundNum = 3
 var roundTime = 80
 
 #Enemy placement
