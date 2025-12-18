@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cnfyj80sfpkq3"]
+[gd_scene load_steps=34 format=3 uid="uid://cnfyj80sfpkq3"]
 
 [ext_resource type="Script" uid="uid://b0arcax67joif" path="res://Scripts/initializevr.gd" id="1_ua3oe"]
 [ext_resource type="Texture2D" uid="uid://ujlhjpujhisj" path="res://Resources/Textures/sky.png" id="2_3n5g3"]
@@ -16,18 +16,19 @@
 [ext_resource type="AudioStream" uid="uid://b6ky6cuao6ou4" path="res://Resources/Sounds/Slingshot Loaded/editedLoad.wav" id="12_0ryyh"]
 [ext_resource type="PackedScene" uid="uid://cfl8awrt1ucb1" path="res://Resources/models/tree.glb" id="12_1e40d"]
 [ext_resource type="AudioStream" uid="uid://b6hjbr7jqjyv4" path="res://Resources/Sounds/Slingshot Release/editedRelease.wav" id="13_3n3ex"]
+[ext_resource type="Script" uid="uid://c0yrk3ai6exhg" path="res://Scripts/Sign Score/GameOverScore.gd" id="17_6di5v"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ebto2"]
 panorama = ExtResource("2_3n5g3")
 energy_multiplier = 0.8
 
-[sub_resource type="Sky" id="Sky_yqnnc"]
+[sub_resource type="Sky" id="Sky_b176m"]
 sky_material = SubResource("PanoramaSkyMaterial_ebto2")
 
 [sub_resource type="Environment" id="Environment_2t1jq"]
 background_mode = 2
 background_color = Color(0.76037085, 0.97431797, 0.9702292, 1)
-sky = SubResource("Sky_yqnnc")
+sky = SubResource("Sky_b176m")
 ambient_light_source = 3
 fog_light_color = Color(0.2635, 0.28132498, 0.31, 1)
 fog_light_energy = 0.8
@@ -1098,6 +1099,14 @@ Score:
 0
 "
 script = ExtResource("9_yqnnc")
+
+[node name="GameOverText" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.383, -12)
+visible = false
+text = "Congraulations!
+You Defended the Barn!"
+font_size = 150
+script = ExtResource("17_6di5v")
 
 [connection signal="timeout" from="GameManager/AdvanceTimer" to="GameManager" method="_on_advance_timer_timeout"]
 [connection signal="timeout" from="GameManager/RoundTimer" to="GameManager" method="_on_round_timer_timeout"]
