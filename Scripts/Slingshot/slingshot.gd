@@ -64,7 +64,7 @@ func _process(delta: float) -> void:
 		if loaded && loadedPumpkin != null && sling.global_position.distance_to(origin) > deadzoneDistance:
 			var area = loadedPumpkin.get_node("PumpkinArea")
 			
-			print("flung pumpkin")
+			#print("flung pumpkin")
 			
 			shootSound.play()
 			

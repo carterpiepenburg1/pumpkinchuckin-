@@ -160,7 +160,7 @@ func _process(_delta: float) -> void:
 				stage4 += 1
 				checkGrabbedPump = true
 				print("iterate pumpkin")
-		elif playerRHAND.grabbedArea.name == "SlingArea":
+		elif playerLHAND.grabbedArea.name == "SlingArea":
 			if checkGrabSling == false:
 				stage5 += 1
 				stage6 += 1	

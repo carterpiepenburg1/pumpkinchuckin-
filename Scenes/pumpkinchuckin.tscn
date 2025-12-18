@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cnfyj80sfpkq3"]
+[gd_scene load_steps=35 format=3 uid="uid://cnfyj80sfpkq3"]
 
 [ext_resource type="Script" uid="uid://b0arcax67joif" path="res://Scripts/initializevr.gd" id="1_ua3oe"]
 [ext_resource type="Texture2D" uid="uid://ujlhjpujhisj" path="res://Resources/Textures/sky.png" id="2_3n5g3"]
@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://b6ky6cuao6ou4" path="res://Resources/Sounds/Slingshot Loaded/editedLoad.wav" id="12_0ryyh"]
 [ext_resource type="PackedScene" uid="uid://cfl8awrt1ucb1" path="res://Resources/models/tree.glb" id="12_1e40d"]
 [ext_resource type="AudioStream" uid="uid://b6hjbr7jqjyv4" path="res://Resources/Sounds/Slingshot Release/editedRelease.wav" id="13_3n3ex"]
-[ext_resource type="Script" path="res://Scripts/Sign Score/GameOverScore.gd" id="17_6di5v"]
+[ext_resource type="Script" uid="uid://c0yrk3ai6exhg" path="res://Scripts/Sign Score/GameOverScore.gd" id="17_6di5v"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ebto2"]
 panorama = ExtResource("2_3n5g3")
@@ -76,6 +76,9 @@ albedo_color = Color(0.700176, 0.38988283, 0.015236197, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdyhi"]
 albedo_color = Color(0.5190005, 0.28110364, 0.008074824, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_6di5v"]
+size = Vector3(60, 10, 0.1)
+
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ua3oe")
 
@@ -95,7 +98,7 @@ parameters/looping = true
 
 [node name="Music" type="AudioStreamPlayer" parent="GameManager"]
 stream = ExtResource("4_cdyhi")
-volume_db = -15.0
+volume_db = -20.0
 autoplay = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -112,7 +115,6 @@ script = ExtResource("2_c37g7")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="Player"]
 transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 0, 1.3581047, 0)
-far = 50.0
 
 [node name="Left" type="XRController3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
@@ -1107,6 +1109,18 @@ text = "Congraulations!
 You Defended the Barn!"
 font_size = 150
 script = ExtResource("17_6di5v")
+
+[node name="EnemyBarrier" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyBarrier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.776001, 2.283142, 0)
+shape = SubResource("BoxShape3D_6di5v")
+
+[node name="Marker" type="CSGBox3D" parent="EnemyBarrier"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45391846, 0)
+material_override = SubResource("StandardMaterial3D_8o4mi")
+size = Vector3(60, 1, 0.1)
 
 [connection signal="timeout" from="GameManager/AdvanceTimer" to="GameManager" method="_on_advance_timer_timeout"]
 [connection signal="timeout" from="GameManager/RoundTimer" to="GameManager" method="_on_round_timer_timeout"]

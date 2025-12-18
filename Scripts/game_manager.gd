@@ -56,7 +56,7 @@ func spawnEnemies():
 				newEnemy = ghost.instantiate()
 			else:
 				newEnemy = crow.instantiate()
-				enemyHeightOffset = rng.randf_range(2, 4)
+				enemyHeightOffset = rng.randf_range(2, 6)
 
 			get_tree().current_scene.add_child(newEnemy)
 			newEnemy.global_position = Vector3(((i / float(Globals.enemiesPerRow - 1)) - 0.5) * Globals.rowWidth, enemyHeightOffset, -Globals.enemyStartDistance)

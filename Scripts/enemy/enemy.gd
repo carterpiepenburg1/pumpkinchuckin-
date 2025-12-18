@@ -15,6 +15,8 @@ func _process(delta: float) -> void:
 	if newPos != null:
 		root.global_position = lerp(root.global_position, newPos, delta*5)
 		
+	
+		
 func advance():
 	newPos = Vector3(root.global_position.x, root.global_position.y, root.global_position.z + Globals.advanceAmount)
 	
@@ -47,6 +49,17 @@ func _on_area_entered(area: Area3D) -> void:
 		sound.play()
 		
 		await sound.finished
+		
+		queue_free()
+	
+	elif area.name == "EnemyBarrier" && visible:
+		
+		#Hide model
+		root.visible = false
+		
+		#Disable area3D
+		set_deferred("monitorable", false)
+		set_deferred("monitoring", false)
 		
 		queue_free()
 
